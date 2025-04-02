@@ -10,12 +10,10 @@
     <x-slot name="form">
         <!-- Profile Photo -->
         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-            <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
+            <div x-data="{ photoName: null, photoPreview: null }" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
-                <input type="file" id="photo" class="hidden"
-                            wire:model.live="photo"
-                            x-ref="photo"
-                            x-on:change="
+                <input type="file" id="photo" class="hidden" wire:model.live="photo" x-ref="photo"
+                    x-on:change="
                                     photoName = $refs.photo.files[0].name;
                                     const reader = new FileReader();
                                     reader.onload = (e) => {
@@ -28,13 +26,14 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
-                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="object-cover rounded-full size-20">
+                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}"
+                        class="object-cover rounded-full size-20">
                 </div>
 
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" x-show="photoPreview" style="display: none;">
                     <span class="block bg-center bg-no-repeat bg-cover rounded-full size-20"
-                          x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
+                        x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>
                 </div>
 
@@ -54,28 +53,36 @@
 
         <div class="col-span-6 sm:col-span-4">
             <x-label for="first_name" value="{{ __('First Name') }}" />
-            <x-input id="first_name" type="text" class="block w-full mt-1" wire:model="state.first_name" required autocomplete="first_name" />
+            <x-input id="first_name" type="text" class="block w-full mt-1" wire:model="state.first_name" required
+                autocomplete="first_name" />
             <x-input-error for="first_name" class="mt-2" />
         </div>
 
-         <!-- Name -->
-         <div class="col-span-6 sm:col-span-4">
+
+        <!-- Name -->
+        <div class="col-span-6 sm:col-span-4">
             <x-label for="last_name" value="{{ __('Last Name') }}" />
-            <x-input id="last_name" type="text" class="block w-full mt-1" wire:model="state.last_name" required autocomplete="last_name" />
+            <x-input id="last_name" type="text" class="block w-full mt-1" wire:model="state.last_name" required
+                autocomplete="last_name" />
             <x-input-error for="last_name" class="mt-2" />
         </div>
+
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="block w-full mt-1" wire:model="state.email" required autocomplete="username" />
+            <x-input id="email" type="email" class="block w-full mt-1" wire:model="state.email" required
+                autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
+            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) &&
+                    !$this->user->hasVerifiedEmail())
                 <p class="mt-2 text-sm dark:text-white">
                     {{ __('Your email address is unverified.') }}
 
-                    <button type="button" class="text-sm text-gray-600 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" wire:click.prevent="sendEmailVerification">
+                    <button type="button"
+                        class="text-sm text-gray-600 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                        wire:click.prevent="sendEmailVerification">
                         {{ __('Click here to re-send the verification email.') }}
                     </button>
                 </p>
@@ -98,4 +105,6 @@
             {{ __('Save') }}
         </x-button>
     </x-slot>
+
+
 </x-form-section>

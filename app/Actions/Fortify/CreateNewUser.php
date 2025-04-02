@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Events\TeacherCreated;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -29,12 +30,17 @@ class CreateNewUser implements CreatesNewUsers
 
         $uniqueNumber = mt_rand(1000000000, 9999999999);
 
-        return User::create([
+        $user = User::create([
             'first_name' => $input['first_name'],
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'unique_number' => $uniqueNumber,
             'password' => Hash::make($input['password']),
         ]);
+
+        event(new TeacherCreated($user));
+
+        return $user;
+
     }
 }
