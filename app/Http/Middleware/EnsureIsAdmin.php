@@ -11,6 +11,7 @@ class EnsureIsAdmin
 {
     /**
      * Handle an incoming request.
+     *https://www.crazygames.com/game/mx-offroad-master
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
