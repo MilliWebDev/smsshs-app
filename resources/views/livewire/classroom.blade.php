@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full h-full p-4 mt-8 space-y-4">
     <div>
         @if (session('message'))
-            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 30000)" x-show="show" x-transition
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 10000)" x-show="show" x-transition
                 class="p-4 mb-4 text-sm text-green-600 bg-green-100 border border-green-400 rounded-lg" role="alert">
                 <div class="flex items-center justify-between">
                     <span class="font-medium">{{ session('message') }}</span>
@@ -15,11 +15,11 @@
 
     <div>
         @if (session('error'))
-            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 30000)" x-show="show" x-transition
-                class="p-4 mb-4 text-sm text-green-600 bg-green-100 border border-green-400 rounded-lg" role="alert">
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 10000)" x-show="show" x-transition
+                class="p-4 mb-4 text-sm text-red-600 bg-green-100 border border-red-400 rounded-lg" role="alert">
                 <div class="flex items-center justify-between">
                     <span class="font-medium">{{ session('error') }}</span>
-                    <button @click="show = false" class="text-green-600 hover:text-green-800">
+                    <button @click="show = false" class="text-red-600 hover:text-red-800">
                         &times;
                     </button>
                 </div>

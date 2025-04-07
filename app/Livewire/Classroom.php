@@ -78,7 +78,7 @@ class Classroom extends Component
                 $class->teachers()->sync($this->selectedTeachers);
             });
 
-            return redirect('/classroom')->with('message', 'Class Created'); // or wherever you want to redirect
+            return redirect('/classroom')->with('message', 'Class Modified'); // or wherever you want to redirect
 
         } catch (\Exception $e) {
 
