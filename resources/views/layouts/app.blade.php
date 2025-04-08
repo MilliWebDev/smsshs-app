@@ -281,10 +281,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard') }}"
-                                class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a href="{{ route('students') }}"
+                                class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                                 <span class="ml-3">{{ __('Students') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('classroom') }}"
+                                class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                <span class="ml-3">{{ __('Classroom') }}</span>
                             </a>
                         </li>
                     </ul>
