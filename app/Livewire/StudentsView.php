@@ -10,6 +10,8 @@ class StudentsView extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        return view('livewire.students-view');
+        return view('livewire.students-view', [
+            'students' => \App\Models\Student::all(),
+        ]);
     }
 }
