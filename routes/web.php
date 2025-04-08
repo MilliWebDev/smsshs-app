@@ -27,5 +27,6 @@ Route::middleware([
     'verified',
     EnsureIsAdmin::class,
 ])->group(function () {
-    Route::get('/classroom', Classroom::class);
+    Route::get('/classroom', Classroom::class)->name('classroom');
+    Route::get('/students', StudentsView::class)->name('students');
 });
