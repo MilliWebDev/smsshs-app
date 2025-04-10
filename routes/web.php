@@ -29,4 +29,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/classroom', Classroom::class)->name('classroom');
     Route::get('/students', StudentsView::class)->name('students');
+    Route::get('/assign-subject', \App\Livewire\AssignSubject::class)->name('assign-subject');
 });
