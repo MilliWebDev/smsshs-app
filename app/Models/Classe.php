@@ -34,4 +34,14 @@ class Classe extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function classSubjectTeachers(): HasMany
+    /**
+     * Get all of the classSubjectTeachers for the Classe
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    {
+        return $this->hasMany(ClassSubjectTeacher::class);
+    }
 }

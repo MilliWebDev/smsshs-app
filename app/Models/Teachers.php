@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Teachers extends Model
 {
@@ -36,5 +37,10 @@ class Teachers extends Model
     public function classes()
     {
         return $this->belongsToMany(Classe::class, 'teacher_class', 'teacher_id', 'class_id')->withTimestamps();
+    }
+
+    public function classSubjectTeachers(): HasMany
+    {
+        return $this->hasMany(ClassSubjectTeacher::class);
     }
 }
