@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classe extends Model
 {
@@ -22,5 +23,15 @@ class Classe extends Model
     public function teachers(): BelongsToMany
     {
         return $this->belongsToMany(Teachers::class, 'teacher_class', 'class_id', 'teacher_id')->withTimestamps();
+    }
+
+    public function students(): HasMany
+    /**
+     * Get all of the students for the Classe
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    {
+        return $this->hasMany(Student::class);
     }
 }
