@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('students', function (Blueprint $table) {
             //
-            $table->uuiId('classroom_id');
+            $table->uuid('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classes')->onDelete('cascade');
         });
     }
