@@ -85,80 +85,44 @@
                             <x-input id="last_name" class="block w-full mt-1" type="text" name="last_name"
                                 wire:model='last_name' :value="old('last_name')" required autofocus autocomplete="last_name" />
                         </div>
-                        <h1 class="block mt-5 text-sm text-gray-700 capitalize dark:text-gray-200">
-                            {{ __('Select teachers') }}
-                            <div class="mt-5 space-y-2">
-                                @foreach ($students as $student)
-                                    <label
-                                        class="flex items-center p-2 space-x-2 border border-gray-200 rounded-md shadow-lg">
-                                        <input type="checkbox" wire:model="selectedTeachers" value="{{ $teacher->id }}"
-                                            class="text-indigo-600 border-gray-300 rounded shadow-sm">
-                                        <span>{{ $teacher->user->last_name }}</span>
-                                        <span>{{ $teacher->user->first_name }}</span>
-                                    </label>
+
+                        <div class="mt-4">
+                            <x-label for="gender" value="{{ __('Gender') }}" />
+                            <select wire:model='gender' name="classroom_id"
+                                class="block w-full p-2 mt-1 border border-gray-300 rounded">
+                                <option>{{ __('Select a gender') }}</option>
+
+                                <option value="male">{{ __('Male') }}</option>
+                                <option value="female">{{ __('Female') }}</option>
+
+                            </select>
+                        </div>
+
+                        <div class="mt-4">
+                            <x-label for="date_of_birth" value="{{ __('Date of birth') }}" />
+                            <x-input id="date_of_birth" class="block w-full mt-1" type="date" name="date_of_birth"
+                                wire:model='date_of_birth' :value="old('date_of_birth')" required autofocus
+                                autocomplete="date_of_birth" />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-label for="classroom" value="{{ __('Classroom') }}" />
+                            <select wire:model="selectedClassroom"
+                                class="block w-full p-2 border border-gray-300 rounded">
+                                <option value="">Select a classroom</option>
+                                @foreach ($classrooms as $classroom)
+                                    <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
                                 @endforeach
-                            </div>
+                            </select>
 
-                            <div class="mt-4">
-                                <h1 class="text-xs font-medium text-gray-400 uppercase">Permissions</h1>
+                        </div>
 
-                                <div class="mt-4 space-y-5">
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: true }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can make task</p>
-                                    </div>
-
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: false }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can delete task</p>
-                                    </div>
-
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: true }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can edit task</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex justify-end mt-6">
-                                <button type="submit"
-                                    class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                    {{ __('Create a classroom') }}
-                                </button>
-                            </div>
+                        <div class="flex justify-end mt-6">
+                            <button type="submit"
+                                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                {{ __('Create Student') }}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -257,83 +221,68 @@
                                                     <input placeholder="CE2" type="text" wire:model="class_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                 </div>
-                                                <h1
-                                                    class="block mt-5 text-sm text-gray-700 capitalize dark:text-gray-200">
-                                                    {{ __('Select teachers') }}
-                                                    <div class="mt-5 space-y-2">
-                                                        @foreach ($teachers as $teacher)
-                                                            <label
-                                                                class="flex items-center p-2 space-x-2 border border-gray-200 rounded-md shadow-lg">
-                                                                <input type="checkbox" wire:model="selectedTeachers"
-                                                                    value="{{ $teacher->id }}"
-                                                                    class="text-indigo-600 border-gray-300 rounded shadow-sm">
-                                                                <span>{{ $teacher->user->first_name }}</span>
-                                                                <span>{{ $teacher->user->last_name }}</span>
-                                                            </label>
-                                                        @endforeach
-                                                    </div>
 
-                                                    <div class="mt-4">
-                                                        <h1 class="text-xs font-medium text-gray-400 uppercase">
-                                                            Permissions</h1>
+                                                <div class="mt-4">
+                                                    <h1 class="text-xs font-medium text-gray-400 uppercase">
+                                                        Permissions</h1>
 
-                                                        <div class="mt-4 space-y-5">
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: true }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
-
-                                                                <p class="text-gray-500">Can make task</p>
+                                                    <div class="mt-4 space-y-5">
+                                                        <div class="flex items-center space-x-3 cursor-pointer"
+                                                            x-data="{ show: true }" @click="show =!show">
+                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
+                                                                <label for="show" @click="show =!show"
+                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
+                                                                        'translate-x-0 border-gray-300'
+                                                                    ]"></label>
+                                                                <input type="checkbox" name="show"
+                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
                                                             </div>
 
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: false }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
+                                                            <p class="text-gray-500">Can make task</p>
+                                                        </div>
 
-                                                                <p class="text-gray-500">Can delete task</p>
+                                                        <div class="flex items-center space-x-3 cursor-pointer"
+                                                            x-data="{ show: false }" @click="show =!show">
+                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
+                                                                <label for="show" @click="show =!show"
+                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
+                                                                        'translate-x-0 border-gray-300'
+                                                                    ]"></label>
+                                                                <input type="checkbox" name="show"
+                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
                                                             </div>
 
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: true }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
+                                                            <p class="text-gray-500">Can delete task</p>
+                                                        </div>
 
-                                                                <p class="text-gray-500">Can edit task</p>
+                                                        <div class="flex items-center space-x-3 cursor-pointer"
+                                                            x-data="{ show: true }" @click="show =!show">
+                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
+                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
+                                                                <label for="show" @click="show =!show"
+                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
+                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
+                                                                        'translate-x-0 border-gray-300'
+                                                                    ]"></label>
+                                                                <input type="checkbox" name="show"
+                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
                                                             </div>
+
+                                                            <p class="text-gray-500">Can edit task</p>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="flex justify-end mt-6">
-                                                        <button type="submit"
-                                                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                                            {{ __('Update') }}
-                                                        </button>
-                                                    </div>
+                                                <div class="flex justify-end mt-6">
+                                                    <button type="submit"
+                                                        class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                                        {{ __('Update') }}
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
