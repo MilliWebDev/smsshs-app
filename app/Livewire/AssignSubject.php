@@ -39,8 +39,9 @@ class AssignSubject extends Component
     public function render()
     {
         return view('livewire.assign-subject', [
-            'subjects' => \App\Models\Subject::all(),
+            'subjects' => \App\Models\ClassSubjectTeacher::with(['teacher', 'subject', 'classroom'])->get(),
             'teachers' => \App\Models\Teachers::all(),
+            'subjects' => \App\Models\Subject::all(),
             'classes' => \App\Models\Classe::all(),
         ]);
     }
