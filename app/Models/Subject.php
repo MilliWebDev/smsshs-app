@@ -24,4 +24,14 @@ class Subject extends Model
     {
         return $this->hasMany(ClassSubjectTeacher::class);
     }
+
+    public function grades(): HasMany
+    /**
+     * Get the grades for the teacher.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    {
+        return $this->hasMany(Grade::class);
+    }
 }
