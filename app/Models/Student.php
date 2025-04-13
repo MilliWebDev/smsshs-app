@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
@@ -34,5 +35,13 @@ class Student extends Model
      */
     {
         return $this->belongsTo(Classe::class);
+    }
+
+    public function grades(): HasMany
+    /**
+     * Get the grades for the student.
+     */
+    {
+        return $this->hasMany(Grade::class);
     }
 }
