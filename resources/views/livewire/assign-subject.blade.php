@@ -164,11 +164,11 @@
                     </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        {{ __('Classes') }}
+                        {{ __('Teachers') }}
                     </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        {{ __('Teachers') }}
+                        {{ __('Classes') }}
                     </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
