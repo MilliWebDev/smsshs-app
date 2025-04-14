@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ClassSubjectTeacher extends Model
 {
+    protected $fillable = [
+        'classroom_id',
+        'subject_id',
+        'teacher_id',
+    ];
+
     public function class(): BelongsTo
     {
         return $this->belongsTo(Classe::class, 'class_id');
