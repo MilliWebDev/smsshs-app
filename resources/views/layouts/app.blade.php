@@ -294,6 +294,13 @@
                                 <span class="ml-3">{{ __('Classroom') }}</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('assign-subject') }}"
+                                class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                <span class="ml-3">{{ __('Subjects') }}</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </aside>
