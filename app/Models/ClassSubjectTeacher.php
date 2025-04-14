@@ -15,7 +15,7 @@ class ClassSubjectTeacher extends Model
 
     public function class(): BelongsTo
     {
-        return $this->belongsTo(Classe::class, 'class_id');
+        return $this->belongsTo(Classe::class, 'classroom_id');
     }
 
     public function subject(): BelongsTo
