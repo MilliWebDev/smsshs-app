@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\ClassSubjectTeacher;
 use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
@@ -72,6 +73,8 @@ class AssignSubject extends Component
             'teachers' => \App\Models\Teachers::all(),
             'subjects' => \App\Models\Subject::all(),
             'classes' => \App\Models\Classe::all(),
+            'class_subject_teachers' => \App\Models\ClassSubjectTeacher::with(['class', 'subject', 'teacher'])->get()
+                ->groupBy('subject_id'),
         ]);
     }
 }

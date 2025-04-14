@@ -177,18 +177,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($subjects as $subject)
+                @foreach ($class_subject_teachers as $subject_id => $items)
                     <tr>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            {{ $subject->name }}
+                            {{ $items->first()->subject->name }}
+                        </td>
+                        <td class="px-4 py-2 border-b border-gray-200">
+                            @foreach ($items->unique('teacher_id') as $item)
+                                <span
+                                    class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                    {{ $item->teacher->user->first_name }} {{ $item->teacher->user->last_name }}
+                                </span>
+                            @endforeach
+
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             <span
                                 class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
-                                {{ $subject->name }}
+
                             </span>
                         </td>
-                        <td class="px-4 py-2 border-b border-gray-200">
+                        <td class="flex gap-2 px-4 py-2 border-b border-gray-200">
                             <div class="" x-data="{ modelOpen2: false }">
                                 <button @click="modelOpen2 = !modelOpen2"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
@@ -253,7 +262,8 @@
                                                         class="block w-full p-2 border border-gray-300 rounded">
                                                         <option value="">Select Class</option>
                                                         @foreach ($classes as $class)
-                                                            <option value="{{ $class->id }}">{{ $class->name }}
+                                                            <option value="{{ $class->id }}">
+                                                                {{ $class->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
