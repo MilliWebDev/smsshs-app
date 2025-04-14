@@ -36,7 +36,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span>{{ __('Create a Subject') }}</span>
+            <span>{{ __('create a subject') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -144,7 +144,7 @@
                         <div class="flex justify-end mt-6">
                             <button type="submit"
                                 class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                {{ __('Create a Subject') }}
+                                {{ __('Create Subject') }}
                             </button>
                         </div>
                     </form>
@@ -178,11 +178,11 @@
             </thead>
             <tbody>
                 @foreach ($class_subject_teachers as $subject_id => $items)
-                    <tr>
-                        <td class="px-4 py-2 border-b border-gray-200">
+                    <tr class="border">
+                        <td class="px-4 py-2 ">
                             {{ $items->first()->subject->name }}
                         </td>
-                        <td class="px-4 py-2 border-b border-gray-200">
+                        <td class="px-4 py-2 ">
                             @foreach ($items->unique('teacher_id') as $item)
                                 <span
                                     class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
@@ -191,13 +191,17 @@
                             @endforeach
 
                         </td>
-                        <td class="px-4 py-2 border-b border-gray-200">
-                            <span
-                                class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
-
-                            </span>
+                        <td class="px-4 py-2 ">
+                            @foreach ($items->unique('classroom_id') as $item)
+                                @if ($item->class)
+                                    <span
+                                        class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                        {{ $item->class->name }}
+                                    </span>
+                                @endif
+                            @endforeach
                         </td>
-                        <td class="flex gap-2 px-4 py-2 border-b border-gray-200">
+                        <td class="flex gap-2 px-4 py-2 ">
                             <div class="" x-data="{ modelOpen2: false }">
                                 <button @click="modelOpen2 = !modelOpen2"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
@@ -294,36 +298,6 @@
                 @endforeach
             </tbody>
         </table>
-    </div>
-    <div class="space-y-4">
-
-
-        <select wire:model="class_id" class="w-full p-2 border rounded">
-            <option value="">Select Class</option>
-            @foreach ($classes as $class)
-                <option value="{{ $class->id }}">{{ $class->name }}</option>
-            @endforeach
-        </select>
-
-        <select wire:model="subject_id" class="w-full p-2 border rounded">
-            <option value="">Select Subject</option>
-            @foreach ($subjects as $subject)
-                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-            @endforeach
-        </select>
-
-        <select wire:model="teacher_id" class="w-full p-2 border rounded">
-            <option value="">Select Teacher</option>
-            @foreach ($teachers as $teacher)
-                <option value="{{ $teacher->id }}">{{ $teacher->user->first_name }} {{ $teacher->user->last_name }}
-                </option>
-            @endforeach
-        </select>
-
-        <input type="text" wire:model="term" placeholder="Enter Term (e.g., Term 1)"
-            class="w-full p-2 border rounded" />
-
-        <button wire:click="assign" class="px-4 py-2 text-white bg-blue-500 rounded">Assign</button>
     </div>
 
 </div>
