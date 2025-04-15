@@ -184,10 +184,17 @@
                         </td>
                         <td class="px-4 py-2 ">
                             @foreach ($items->unique('teacher_id') as $item)
-                                <span
-                                    class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
-                                    {{ $item->teacher->user->first_name }} {{ $item->teacher->user->last_name }}
-                                </span>
+                                @if ($item->teacher && $item->teacher->user)
+                                    <ol wire:key="{{ $item->id }}">
+                                        <li>
+                                            <span
+                                                class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                                {{ $item->teacher->user->first_name }}
+                                                {{ $item->teacher->user->last_name }}
+                                            </span>
+                                        </li>
+                                    </ol>
+                                @endif
                             @endforeach
 
                         </td>
