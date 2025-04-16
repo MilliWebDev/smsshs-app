@@ -7,6 +7,7 @@ use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class AssignSubject extends Component
@@ -18,6 +19,7 @@ class AssignSubject extends Component
     public $subject_description;
 
     public $teacher_id = [];
+
     public $selectedId;
 
     public function createSubject()
@@ -37,7 +39,7 @@ class AssignSubject extends Component
                 if ($existingSubject) {
                     // Throw an exception to stop everything
                     throw ValidationException::withMessages([
-                        'subject_name' => 'The subject already exists.',
+                        'subject_name' => 'Matière existante',
                     ]);
                 }
 
@@ -58,11 +60,11 @@ class AssignSubject extends Component
                 }
             });
 
-            return redirect('/assign-subject')->with('message', 'Subject Assigned'); // or wherever you want to redirect
+            return redirect('/assign-subject')->with('message', 'Matière ajoutée'); // or wherever you want to redirect
 
         } catch (\Exception $e) {
 
-            return redirect('/assign-subject')->with('error', 'Subject Not Assigned: '.$e->getMessage()); // Preserves form input on error
+            return redirect('/assign-subject')->with('error', 'Matière non ajoutée: '.$e->getMessage()); // Preserves form input on error
         }
     }
 
@@ -70,14 +72,19 @@ class AssignSubject extends Component
     public function select($id)
     {
 
-        $this->selectedId = $id;
+        $cleanId = strtolower(trim($id));
+        $this->selectedId = $cleanId;
+        $subject = Subject::with(['classSubjectTeachers.class', 'classSubjectTeachers.teacher'])->where('id', $cleanId)->first();
+        $this->subject_name = $subject->name;
+        $this->subject_description = $subject->description;
+        $this->class_id = $subject->classSubjectTeachers->pluck('classroom_id')->toArray();
+        $this->teacher_id = $subject->classSubjectTeachers->pluck('teacher_id')->toArray();
 
     }
 
     public function update()
     {
-        dd($this->selectedId);
-        
+
         $record = \App\Models\Subject::find($this->selectedId);
         $record->name = $this->subject_name;
         $record->description = $this->subject_description;
@@ -91,12 +98,18 @@ class AssignSubject extends Component
 
         try {
             DB::transaction(function () {
-                // Create the subject
-                $subject = Subject::create([
+                $subject = Subject::findOrFail($this->selectedId);
+
+                // Update subject info
+                $subject->update([
                     'name' => $this->subject_name,
                     'description' => $this->subject_description,
                 ]);
 
+                // Optional: Delete old associations before reassigning
+                ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
+
+                // Re-create associations
                 foreach ($this->class_id as $class) {
                     foreach ($this->teacher_id as $teacher) {
                         ClassSubjectTeacher::create([
@@ -108,11 +121,9 @@ class AssignSubject extends Component
                 }
             });
 
-            return redirect('/assign-subject')->with('message', 'Subject Assigned'); // or wherever you want to redirect
-
+            return redirect('/assign-subject')->with('message', 'Matière modifiée avec succès.');
         } catch (\Exception $e) {
-
-            return redirect('/assign-subject')->with('error', 'Subject Not Assigned: '.$e->getMessage()); // Preserves form input on error
+            return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
         }
     }
 
