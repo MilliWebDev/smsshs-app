@@ -209,7 +209,8 @@
                         </td>
                         <td class="flex gap-2 px-4 py-2 ">
                             <div class="" x-data="{ modelOpen2: false }">
-                                <button @click="modelOpen2 = !modelOpen2" wire:click="$dispatch('update-created', { id:'{{ $subject_id}}' })"
+                                <button @click="modelOpen2 = !modelOpen2"
+                                    wire:click="$dispatch('update-created', { id:'{{ $subject_id }}' })"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -263,62 +264,65 @@
                                                 <div>
                                                     <label for="subject_name"
                                                         class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
-                                                    <input placeholder="Math" type="text" wire:model="subject_name"
+                                                    <input placeholder="Math" type="text"
+                                                        wire:model="subject_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                 </div>
-                        
+
                                                 <div class="mt-4">
                                                     <label for="subject_description"
                                                         class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                                                     <textarea placeholder="Math is the study of numbers, shapes, and patterns." wire:model="subject_description"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
                                                 </div>
-                        
+
                                                 <div class="w-full mt-4 ">
                                                     <div class="" x-data="{ show: false }">
                                                         <a href="#" x-on:click.prevent="show = !show"
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                                            <span class="inline-block">{{ __('Sélectionner classes') }}</span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor"
+                                                            <span
+                                                                class="inline-block">{{ __('Sélectionner classes') }}</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor"
                                                                 class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
                                                                 x-bind:class="{ 'rotate-180': show }">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                    d="M19 9l-7 7-7-7" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M19 9l-7 7-7-7" />
                                                             </svg>
                                                         </a>
                                                         <div x-show.transition="show"
                                                             class="relative z-20 flex flex-col w-full px-4 py-8 mt-1 bg-white border border-gray-600 rounded whitespace-nowrap">
                                                             @foreach ($classes as $class)
                                                                 <div>
-                                                                    <input wire:model='class_id' type="checkbox" name="type[]"
-                                                                        value="{{ $class->id }}"
+                                                                    <input wire:model='class_id' type="checkbox"
+                                                                        name="type[]" value="{{ $class->id }}"
                                                                         class="inline-block mr-2" />{{ $class->name }}
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
                                                 </div>
-                        
+
                                                 <div class="w-full mt-4 ">
                                                     <div class="" x-data="{ show: false }">
                                                         <a href="#" x-on:click.prevent="show = !show"
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                                            <span class="inline-block">{{ __('Sélectionner enseignants') }}</span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor"
+                                                            <span
+                                                                class="inline-block">{{ __('Sélectionner enseignants') }}</span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor"
                                                                 class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
                                                                 x-bind:class="{ 'rotate-180': show }">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                    d="M19 9l-7 7-7-7" />
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2" d="M19 9l-7 7-7-7" />
                                                             </svg>
                                                         </a>
                                                         <div x-show.transition="show"
                                                             class="relative z-20 flex flex-col w-full px-4 py-8 mt-1 bg-white border border-gray-600 rounded whitespace-nowrap">
                                                             @foreach ($teachers as $item)
                                                                 <div>
-                                                                    <input wire:model='teacher_id' type="checkbox" name="type[]"
-                                                                        value="{{ $item->id }}"
+                                                                    <input wire:model='teacher_id' type="checkbox"
+                                                                        name="type[]" value="{{ $item->id }}"
                                                                         class="inline-block mr-2" />{{ $item->user->first_name }}
                                                                     {{ $item->user->last_name }}
                                                                 </div>
@@ -326,8 +330,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                        
-                        
+
+
                                                 <div class="flex justify-end mt-6">
                                                     <button type="submit"
                                                         class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
@@ -346,7 +350,7 @@
                                         d="M6 2a1 1 0 011-1h6a1 1 0 011 1h3a1 1 0 110 2H2a1 1 0 110-2h3zm3 4a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zM4 6a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1H4zm10 0a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1h-1z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                <span>{{ __('Delete') }}</span>
+                                <span>{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>
