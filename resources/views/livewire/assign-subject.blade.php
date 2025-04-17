@@ -78,6 +78,9 @@
                                 class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                             <input placeholder="Math" type="text" wire:model="subject_name"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            @error('subject_name')
+                                <p class="mt-1 text-sm text-red-600">{{ __('Veillez entrer un nom') }}</p>
+                            @enderror
                         </div>
 
                         <div class="mt-4">
@@ -85,6 +88,9 @@
                                 class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                             <textarea placeholder="Math is the study of numbers, shapes, and patterns." wire:model="subject_description"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
+                            @error('subject_description')
+                                <p class="mt-1 text-sm text-red-600">{{ __('Veillez entrer une description') }}</p>
+                            @enderror
                         </div>
 
                         <div class="w-full mt-4 ">
@@ -111,6 +117,10 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @error('class_id')
+                                <p class="mt-1 text-sm text-red-600">{{ __('Veillez sélectionner une classe') }}
+                                </p>
+                            @enderror
                         </div>
 
                         <div class="w-full mt-4 ">
@@ -138,6 +148,9 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @error('teacher_id')
+                                <p class="mt-1 text-sm text-red-600">{{ __('Veillez sélectionner un enseignant') }}</p>
+                            @enderror
                         </div>
 
 
@@ -207,12 +220,12 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td class="flex gap-2 px-4 py-2 ">
+                        <td class="flex items-baseline gap-2 px-4 py-2">
                             <div class="" x-data="{ modelOpen2: false }">
                                 <button @click="modelOpen2 = !modelOpen2"
                                     wire:click="$dispatch('update-created', { id:'{{ $subject_id }}' })"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
@@ -267,6 +280,10 @@
                                                     <input placeholder="Math" type="text"
                                                         wire:model="subject_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                                    @error('subject_name')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez entrer un nom') }}</p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="mt-4">
@@ -274,6 +291,10 @@
                                                         class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                                                     <textarea placeholder="Math is the study of numbers, shapes, and patterns." wire:model="subject_description"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
+                                                    @error('subject_description')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez entrer une description') }}</p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="w-full mt-4 ">
@@ -301,6 +322,10 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
+                                                    @error('class_id')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez sélectionner une classe') }}</p>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="w-full mt-4 ">
@@ -329,6 +354,10 @@
                                                             @endforeach
                                                         </div>
                                                     </div>
+                                                    @error('teacher_id')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez sélectionner un enseignant') }}</p>
+                                                    @enderror
                                                 </div>
 
 
@@ -343,12 +372,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="flex items-center space-x-2 text-red-600 hover:text-red-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 011-1h6a1 1 0 011 1h3a1 1 0 110 2H2a1 1 0 110-2h3zm3 4a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zM4 6a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1H4zm10 0a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1h-1z"
-                                        clip-rule="evenodd" />
+                            <button wire:click="delete('{{ $subject_id }}')"
+                                wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer cette matière ?') }}\n\n{{ __('apuyer supprimer ') }}|supprimer'
+                                class="flex items-center space-x-2 text-red-600 hover:text-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
+                                    </path>
                                 </svg>
                                 <span>{{ __('Supprimer') }}</span>
                             </button>

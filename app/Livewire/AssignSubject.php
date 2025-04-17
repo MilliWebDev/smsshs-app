@@ -106,15 +106,15 @@ class AssignSubject extends Component
                     'description' => $this->subject_description,
                 ]);
 
-                // Optional: Delete old associations before reassigning
-                ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
-
                 // Re-create associations
+                // Detach existing associations
+                $subject->classSubjectTeachers()->delete();
+
+                // Attach new associations
                 foreach ($this->class_id as $class) {
                     foreach ($this->teacher_id as $teacher) {
-                        ClassSubjectTeacher::create([
+                        $subject->classSubjectTeachers()->create([
                             'classroom_id' => $class,
-                            'subject_id' => $subject->id,
                             'teacher_id' => $teacher,
                         ]);
                     }
@@ -125,6 +125,25 @@ class AssignSubject extends Component
         } catch (\Exception $e) {
             return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
         }
+    }
+
+    public function delete($id)
+    {
+        $subject = \App\Models\Subject::find($id);
+
+        if ($subject) {
+            // Delete all related records in ClassSubjectTeacher
+            $subject->classSubjectTeachers()->delete();
+
+            // Delete the subject itself
+            $subject->delete();
+
+            return redirect('/assign-subject')->with('message', 'Matière et ses associations supprimées avec succès.');
+        }
+
+        return redirect('/assign-subject')->with('error', 'Erreur: La matière n\'existe pas.');
+
+        return redirect('/assign-subject')->with('message', 'Matière supprimée avec succès.');
     }
 
     #[Layout('layouts.app')]
