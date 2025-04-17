@@ -44,4 +44,11 @@ class Student extends Model
     {
         return $this->hasMany(Grade::class);
     }
+
+    public function assignments(): BelongsToMany
+    {
+        return $this->belongsToMany(Assignment::class, 'grades')
+            ->withPivot(['id', 'score', 'comment', 'teacher_id', 'subject_id', 'is_late', 'submitted_at'])
+            ->withTimestamps();
+    }
 }
