@@ -284,21 +284,21 @@
                             <a href="{{ route('students') }}"
                                 class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Students') }}</span>
+                                <span class="ml-3">{{ __('Apprenants') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('classroom') }}"
                                 class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Classroom') }}</span>
+                                <span class="ml-3">{{ __('Salle de classe') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('assign-subject') }}"
                                 class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Subjects') }}</span>
+                                <span class="ml-3">{{ __('Matière') }}</span>
                             </a>
                         </li>
                     </ul>
