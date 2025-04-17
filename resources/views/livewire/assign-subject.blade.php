@@ -373,7 +373,7 @@
                                 </div>
                             </div>
                             <button wire:click="delete('{{ $subject_id }}')"
-                                wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer cette matière ?') }}\n\n{{ __('apuyer supprimer ') }}|supprimer'
+                                wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer cette matière ?') }}\n\n{{ __('appuyer supprimer ') }}|supprimer'
                                 class="flex items-center space-x-2 text-red-600 hover:text-red-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
                                     fill="currentColor" viewBox="0 0 24 24">
