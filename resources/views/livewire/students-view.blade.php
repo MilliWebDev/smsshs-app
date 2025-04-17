@@ -37,7 +37,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span>{{ __('Add a student') }}</span>
+            <span>{{ __('Ajouter apprenant') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -57,7 +57,7 @@
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                     <div class="flex items-center justify-between space-x-4">
-                        <h1 class="text-xl font-medium text-gray-800 ">{{ __('Add a student') }}</h1>
+                        <h1 class="text-xl font-medium text-gray-800 ">{{ __('Ajouter apprenant') }}</h1>
 
                         <button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -69,44 +69,44 @@
                     </div>
 
                     <p class="mt-2 text-sm text-gray-500 ">
-                        {{ __('Add Students') }}
+                        {{ __('Ajouter apprenant') }}
                     </p>
 
                     <form class="mt-5" wire:submit="createStudent" id="createStudent">
                         <div>
-                            <x-label for="first_name" value="{{ __('First Name') }}" />
+                            <x-label for="first_name" value="{{ __('Prénoms') }}" />
                             <x-input id="first_name" class="block w-full mt-1" type="text" name="first_name"
                                 wire:model='first_name' :value="old('first_name')" required autofocus
                                 autocomplete="first_name" />
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="last_name" value="{{ __('Last Name') }}" />
+                            <x-label for="last_name" value="{{ __('Nom de famille') }}" />
                             <x-input id="last_name" class="block w-full mt-1" type="text" name="last_name"
                                 wire:model='last_name' :value="old('last_name')" required autofocus autocomplete="last_name" />
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="gender" value="{{ __('Gender') }}" />
+                            <x-label for="gender" value="{{ __('Sexe') }}" />
                             <select wire:model='gender' name="classroom_id"
                                 class="block w-full p-2 mt-1 border border-gray-300 rounded">
                                 <option>{{ __('Select a gender') }}</option>
 
-                                <option value="male">{{ __('Male') }}</option>
-                                <option value="female">{{ __('Female') }}</option>
+                                <option value="male">{{ __('Masculin') }}</option>
+                                <option value="female">{{ __('Féminin') }}</option>
 
                             </select>
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="date_of_birth" value="{{ __('Date of birth') }}" />
+                            <x-label for="date_of_birth" value="{{ __('Date de naissance') }}" />
                             <x-input id="date_of_birth" class="block w-full mt-1" type="date" name="date_of_birth"
                                 wire:model='date_of_birth' :value="old('date_of_birth')" required autofocus
                                 autocomplete="date_of_birth" />
                         </div>
 
                         <div class="mt-4">
-                            <x-label for="classroom" value="{{ __('Classroom') }}" />
+                            <x-label for="classroom" value="{{ __('Salle de classe') }}" />
                             <select wire:model="selectedClassroom"
                                 class="block w-full p-2 border border-gray-300 rounded">
                                 <option value="">Select a classroom</option>
@@ -120,7 +120,7 @@
                         <div class="flex justify-end mt-6">
                             <button type="submit"
                                 class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                {{ __('Create Student') }}
+                                {{ __('Validez') }}
                             </button>
                         </div>
                     </form>
@@ -137,15 +137,20 @@
                 <tr>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Classroom
+                        {{ __('Apprenants') }}
                     </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Teachers
+                        {{ __('Salle de classes') }}
                     </th>
+                    
+                    <th
+                    class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                    {{ __('Sexe') }}
+                     </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Actions
+                        {{ __('Actions') }}
                     </th>
                 </tr>
             </thead>
@@ -153,25 +158,31 @@
                 @foreach ($students as $student)
                     <tr>
                         <td class="px-4 py-2 border-b border-gray-200">
-                            {{ $student->first_name }}
+                            {{ $student->first_name }} {{ $student->last_name }}
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             <span
                                 class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
-                                {{ $student->last_name }}
+                                {{ $student->classroom->name }}
                             </span>
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
+                            <span
+                                class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                {{ $student->gender }}
+                            </span>
+                        </td>
+                        <td class="flex items-baseline gap-2 px-4 py-2">
                             <div class="" x-data="{ modelOpen2: false }">
-                                <button wire:click="$dispatch('update-created', { id:' {{ $classroom->id }}' })"
+                                <button wire:click="$dispatch('update-created', { id:' {{ $student->id }}' })"
                                     @click="modelOpen2 = !modelOpen2"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
                                     </svg>
-                                    <span>{{ __('Edit') }}</span>
+                                    <span>{{ __('Modifier') }}</span>
                                 </button>
 
                                 <div x-show="modelOpen2" class="fixed inset-0 z-50 overflow-y-auto"
@@ -196,7 +207,7 @@
                                             class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                                             <div class="flex items-center justify-between space-x-4">
                                                 <h1 class="text-xl font-medium text-gray-800 ">
-                                                    {{ __('Create a new classroom') }}</h1>
+                                                    {{ __('Créer un apprenant') }}</h1>
 
                                                 <button @click="modelOpen2 = false"
                                                     class="text-gray-600 focus:outline-none hover:text-gray-700">
@@ -210,77 +221,59 @@
                                             </div>
 
                                             <p class="mt-2 text-sm text-gray-500 ">
-                                                {{ __('Add teachers to classroom') }}
+                                                {{ __('Ajouter un apprenant') }}
                                             </p>
 
                                             <form class="mt-5" wire:submit.prevent="update">
 
                                                 <div>
-                                                    <label for="class_name"
-                                                        class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Classroom Name') }}</label>
-                                                    <input placeholder="CE2" type="text" wire:model="class_name"
-                                                        class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                                    <x-label for="first_name" value="{{ __('Prénoms') }}" />
+                                                    <x-input id="first_name" class="block w-full mt-1" type="text" name="first_name"
+                                                        wire:model='first_name' :value="old('first_name')" required autofocus
+                                                        autocomplete="first_name" />
                                                 </div>
-
+                        
                                                 <div class="mt-4">
-                                                    <h1 class="text-xs font-medium text-gray-400 uppercase">
-                                                        Permissions</h1>
-
-                                                    <div class="mt-4 space-y-5">
-                                                        <div class="flex items-center space-x-3 cursor-pointer"
-                                                            x-data="{ show: true }" @click="show =!show">
-                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                <label for="show" @click="show =!show"
-                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                        'translate-x-0 border-gray-300'
-                                                                    ]"></label>
-                                                                <input type="checkbox" name="show"
-                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                            </div>
-
-                                                            <p class="text-gray-500">Can make task</p>
-                                                        </div>
-
-                                                        <div class="flex items-center space-x-3 cursor-pointer"
-                                                            x-data="{ show: false }" @click="show =!show">
-                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                <label for="show" @click="show =!show"
-                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                        'translate-x-0 border-gray-300'
-                                                                    ]"></label>
-                                                                <input type="checkbox" name="show"
-                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                            </div>
-
-                                                            <p class="text-gray-500">Can delete task</p>
-                                                        </div>
-
-                                                        <div class="flex items-center space-x-3 cursor-pointer"
-                                                            x-data="{ show: true }" @click="show =!show">
-                                                            <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                <label for="show" @click="show =!show"
-                                                                    class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                    :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                        'translate-x-0 border-gray-300'
-                                                                    ]"></label>
-                                                                <input type="checkbox" name="show"
-                                                                    class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                            </div>
-
-                                                            <p class="text-gray-500">Can edit task</p>
-                                                        </div>
-                                                    </div>
+                                                    <x-label for="last_name" value="{{ __('Nom de famille') }}" />
+                                                    <x-input id="last_name" class="block w-full mt-1" type="text" name="last_name"
+                                                        wire:model='last_name' :value="old('last_name')" required autofocus autocomplete="last_name" />
                                                 </div>
-
+                        
+                                                <div class="mt-4">
+                                                    <x-label for="gender" value="{{ __('Sexe') }}" />
+                                                    <select wire:model='gender' name="classroom_id"
+                                                        class="block w-full p-2 mt-1 border border-gray-300 rounded">
+                                                        <option>{{ __('Select a gender') }}</option>
+                        
+                                                        <option value="male">{{ __('Masculin') }}</option>
+                                                        <option value="female">{{ __('Féminin') }}</option>
+                        
+                                                    </select>
+                                                </div>
+                        
+                                                <div class="mt-4">
+                                                    <x-label for="date_of_birth" value="{{ __('Date de naissance') }}" />
+                                                    <x-input id="date_of_birth" class="block w-full mt-1" type="date" name="date_of_birth"
+                                                        wire:model='date_of_birth' :value="old('date_of_birth')" required autofocus
+                                                        autocomplete="date_of_birth" />
+                                                </div>
+                        
+                                                <div class="mt-4">
+                                                    <x-label for="classroom" value="{{ __('Salle de classe') }}" />
+                                                    <select wire:model="selectedClassroom"
+                                                        class="block w-full p-2 border border-gray-300 rounded">
+                                                        <option value="">Select a classroom</option>
+                                                        @foreach ($classrooms as $classroom)
+                                                            <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                        
+                                                </div>
+                        
                                                 <div class="flex justify-end mt-6">
                                                     <button type="submit"
                                                         class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                                        {{ __('Update') }}
+                                                        {{ __('Validez') }}
                                                     </button>
                                                 </div>
                                             </form>
@@ -288,14 +281,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="flex items-center space-x-2 text-red-600 hover:text-red-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 011-1h6a1 1 0 011 1h3a1 1 0 110 2H2a1 1 0 110-2h3zm3 4a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zM4 6a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1H4zm10 0a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1h-1z"
-                                        clip-rule="evenodd" />
+                            <button wire:click="delete('{{ $student->id }}')"
+                                wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer ce devoir ?') }}\n\n{{ __('appuyer supprimer ') }}|supprimer'
+                                class="flex items-center space-x-2 text-red-600 hover:text-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
+                                    </path>
                                 </svg>
-                                <span>{{ __('Delete') }}</span>
+                                <span>{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>

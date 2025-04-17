@@ -298,7 +298,24 @@
                             <a href="{{ route('assign-subject') }}"
                                 class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Matière') }}</span>
+                                <span class="ml-3">{{ __('Matières') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('assignmentview') }}"
+                                class="{{ request()->routeIs('assignmentview') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                <span class="ml-3">{{ __('Devoir scolaire') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <x-section-border /> 
+                    <ul>
+                        <li>
+                            <a href="{{ route('profile.show') }}"
+                                class="{{ request()->routeIs('profile.show') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                <span class="ml-3">{{ __('Donner une note') }}</span>
                             </a>
                         </li>
                     </ul>
