@@ -19,6 +19,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/students', StudentsView::class);
+    Route::get('/grades', \App\Livewire\Grade::class)->name('grades');
 });
 
 Route::middleware([
