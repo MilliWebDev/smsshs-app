@@ -309,11 +309,11 @@
                             </a>
                         </li>
                     </ul>
-                    <x-section-border /> 
+                    <x-section-border />
                     <ul>
                         <li>
-                            <a href="{{ route('profile.show') }}"
-                                class="{{ request()->routeIs('profile.show') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <a href="{{ route('grades') }}"
+                                class="{{ request()->routeIs('grades') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
                                 <span class="ml-3">{{ __('Donner une note') }}</span>
                             </a>
