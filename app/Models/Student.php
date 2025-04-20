@@ -34,7 +34,7 @@ class Student extends Model
      * Get the classroom that owns the student.
      */
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Classe::class, 'classroom_id');
     }
 
     public function grades(): HasMany

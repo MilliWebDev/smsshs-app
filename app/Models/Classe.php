@@ -32,13 +32,11 @@ class Classe extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'classroom_id');
     }
 
     /**
      * Get all of the classSubjectTeachers for the Classe
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function classSubjectTeachers(): HasMany
     {
