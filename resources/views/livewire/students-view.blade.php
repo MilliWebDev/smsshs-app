@@ -143,11 +143,11 @@
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Salle de classes') }}
                     </th>
-                    
+
                     <th
-                    class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                    {{ __('Sexe') }}
-                     </th>
+                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        {{ __('Sexe') }}
+                    </th>
                     <th
                         class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Actions') }}
@@ -156,7 +156,7 @@
             </thead>
             <tbody>
                 @foreach ($students as $student)
-                    <tr>
+                    <tr class="border">
                         <td class="px-4 py-2 border-b border-gray-200">
                             {{ $student->first_name }} {{ $student->last_name }}
                         </td>
@@ -228,48 +228,52 @@
 
                                                 <div>
                                                     <x-label for="first_name" value="{{ __('Prénoms') }}" />
-                                                    <x-input id="first_name" class="block w-full mt-1" type="text" name="first_name"
-                                                        wire:model='first_name' :value="old('first_name')" required autofocus
-                                                        autocomplete="first_name" />
+                                                    <x-input id="first_name" class="block w-full mt-1" type="text"
+                                                        name="first_name" wire:model='first_name' :value="old('first_name')"
+                                                        required autofocus autocomplete="first_name" />
                                                 </div>
-                        
+
                                                 <div class="mt-4">
                                                     <x-label for="last_name" value="{{ __('Nom de famille') }}" />
-                                                    <x-input id="last_name" class="block w-full mt-1" type="text" name="last_name"
-                                                        wire:model='last_name' :value="old('last_name')" required autofocus autocomplete="last_name" />
+                                                    <x-input id="last_name" class="block w-full mt-1" type="text"
+                                                        name="last_name" wire:model='last_name' :value="old('last_name')"
+                                                        required autofocus autocomplete="last_name" />
                                                 </div>
-                        
+
                                                 <div class="mt-4">
                                                     <x-label for="gender" value="{{ __('Sexe') }}" />
                                                     <select wire:model='gender' name="classroom_id"
                                                         class="block w-full p-2 mt-1 border border-gray-300 rounded">
                                                         <option>{{ __('Select a gender') }}</option>
-                        
+
                                                         <option value="male">{{ __('Masculin') }}</option>
                                                         <option value="female">{{ __('Féminin') }}</option>
-                        
+
                                                     </select>
                                                 </div>
-                        
+
                                                 <div class="mt-4">
-                                                    <x-label for="date_of_birth" value="{{ __('Date de naissance') }}" />
-                                                    <x-input id="date_of_birth" class="block w-full mt-1" type="date" name="date_of_birth"
+                                                    <x-label for="date_of_birth"
+                                                        value="{{ __('Date de naissance') }}" />
+                                                    <x-input id="date_of_birth" class="block w-full mt-1"
+                                                        type="date" name="date_of_birth"
                                                         wire:model='date_of_birth' :value="old('date_of_birth')" required autofocus
                                                         autocomplete="date_of_birth" />
                                                 </div>
-                        
+
                                                 <div class="mt-4">
                                                     <x-label for="classroom" value="{{ __('Salle de classe') }}" />
                                                     <select wire:model="selectedClassroom"
                                                         class="block w-full p-2 border border-gray-300 rounded">
                                                         <option value="">Select a classroom</option>
                                                         @foreach ($classrooms as $classroom)
-                                                            <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
+                                                            <option value="{{ $classroom->id }}">
+                                                                {{ $classroom->name }}</option>
                                                         @endforeach
                                                     </select>
-                        
+
                                                 </div>
-                        
+
                                                 <div class="flex justify-end mt-6">
                                                     <button type="submit"
                                                         class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
