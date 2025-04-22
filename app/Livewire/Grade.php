@@ -40,12 +40,28 @@ class Grade extends Component
             return;
         }
 
+        if ($grade == 0) {
+            $description = 'Résultat de l\'élève est nul';
+        } elseif ($grade < 10) {
+            $description = 'Résultat de l\'élève est insuffisant';
+        } elseif ($grade < 15) {
+            $description = 'Résultat de l\'élève est moyen';
+        } elseif ($grade < 18) {
+            $description = 'Résultat de l\'élève est bon';
+        } elseif ($grade < 20) {
+            $description = 'Résultat de l\'élève est très bon';
+        } else {
+            $description = 'Résultat de l\'élève est excellent';
+        }
+
         $grade = \App\Models\Grade::updateOrCreate(
             [
                 'student_id' => $studentId,
                 'assignment_id' => $assignmentId,
                 'teacher_id' => $teacherId,
                 'subject_id' => $subjectId,
+                'comment' => $description,
+
             ],
             [
                 'score' => $grade,
