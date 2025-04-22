@@ -36,8 +36,10 @@
                                 @foreach ($assignments as $assignment)
                                     <td class="p-2">
                                         <input type="number" min="0" max="20"
-                                            wire:change.debounce.500ms="saveGrade({{ $student->id }}, {{ $assignment->id }}, $event.target.value)"
+                                            wire:change.debounce.500ms="saveGrade('{{ $student->id }}', '{{ $assignment->id }}', $event.target.value)"
                                             class="w-16 px-2 py-1 border rounded" />
+                                        <div x-on:notify="notify('New post: ' + $event.detail.title)"></div>
+
                                     </td>
                                 @endforeach
                             </tr>

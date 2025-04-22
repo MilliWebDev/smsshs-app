@@ -42,6 +42,35 @@ class Grade extends Component
         // dd($selected->classroom_id);
     }
 
+    public function saveGrade($studentId, $assignmentId, $grade)
+    {
+        $grade = (int) $grade;
+        $teacherId = auth()->user()->teacher->id;
+        $subjectId = \App\Models\ClassSubjectTeacher::find($this->selectedClassSubjectTeacher)->subject_id;
+        // dd($subjectId);
+
+        // Validate score
+        if (! is_numeric($grade) || $grade < 0 || $grade > 20) {
+            $this->dispatch('notify');
+
+            return;
+        }
+
+        $grade = \App\Models\Grade::updateOrCreate(
+            [
+                'student_id' => $studentId,
+                'assignment_id' => $assignmentId,
+                'teacher_id' => $teacherId,
+                'subject_id' => $subjectId,
+            ],
+            [
+                'score' => $grade,
+            ]
+        );
+
+        // dd($grade);
+    }
+
     #[Layout('layouts.app')]
     public function render()
     {
