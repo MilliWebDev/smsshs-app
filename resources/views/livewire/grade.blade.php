@@ -33,8 +33,7 @@
                                     <td class="p-2">
                                         <input type="number" min="0" max="20"
                                             wire:change.debounce.500ms="saveGrade('{{ $student->id }}', '{{ $assignment->id }}', $event.target.value)"
-                                            class="w-16 px-2 py-1 border rounded" />
-                                        <div x-on:notify="notify('New post: ' + $event.detail.title)"></div>
+                                            class="w-20 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200" />
 
                                     </td>
                                 @endforeach
