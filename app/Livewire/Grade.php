@@ -65,7 +65,6 @@ class Grade extends Component
             : new \Illuminate\Pagination\LengthAwarePaginator([], 0, 20);
 
         return view('livewire.grade', [
-            'grades' => \App\Models\Grade::all(),
             'classSubjectTeachers' => \App\Models\ClassSubjectTeacher::with(['class', 'subject', 'teacher'])->where('teacher_id', $teacherId)->get(),
             'students' => $students,
             'assignments' => \App\Models\Assignment::all(),
