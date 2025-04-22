@@ -1,19 +1,15 @@
-<div class="p-6 bg-white rounded shadow">
-    <input type="number" wire:model.live='username' />
-    Todo character length: <h2 x-text={{ $username }}></h2>
-    <h2 class="text-2xl font-semibold text-gray-700">Manage Grades</h2>
+<div class="p-6 bg-white rounded shadow mt-10">
 
     <div class="my-4">
-        <label class="block mb-2 font-medium text-gray-600">Select Class & Subject</label>
+        <label class="block mb-2 font-medium text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
         <select wire:model.live="selectedClassSubjectTeacher" class="w-full p-2 border border-gray-300 rounded">
-            <option value="">Select Class and Subject</option>
+            <option value="">{{ __('Sélectionner une classe et une matière') }}</option>
             @foreach ($classSubjectTeachers as $cst)
                 <option value="{{ $cst->id }}">
                     {{ $cst->class->name }} - {{ $cst->subject->name }}
                 </option>
             @endforeach
         </select>
-        <p>Selected ID: {{ $selectedClassSubjectTeacher }}</p>
     </div>
 
     @if ($students && $assignments)
@@ -47,6 +43,10 @@
                     @endif
                 </tbody>
             </table>
+            <div class="mt-4">
+                {{ $students->links() }}
+            </div>
+
         </div>
     @endif
 </div>

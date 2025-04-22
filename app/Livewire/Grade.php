@@ -4,42 +4,27 @@ namespace App\Livewire;
 
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Grade extends Component
 {
+    use WithPagination;
+
     public $selectedClassSubjectTeacher;
 
-    public $username;
-
-    public $students = [];
+    public $classroomId;
 
     public function updatedSelectedClassSubjectTeacher($value)
     {
-        $this->loadStudents();
+        $selected = \App\Models\ClassSubjectTeacher::find($this->selectedClassSubjectTeacher);
+        $this->classroomId = $selected?->classroom_id;
+        $this->resetPage();
     }
 
     public function mount()
     {
         $this->selectedClassSubjectTeacher = null;
-        $this->students = [];
-        $this->username = 3;
-    }
 
-    public function loadStudents()
-    {
-        $this->students = [];
-        // dd($this->selectedClassSubjectTeacher);
-
-        if ($this->selectedClassSubjectTeacher) {
-            $selected = \App\Models\ClassSubjectTeacher::find($this->selectedClassSubjectTeacher);
-
-            if ($selected && $selected->classroom_id) {
-                $this->students = \App\Models\Student::where('classroom_id', $selected->classroom_id)->get();
-            }
-        }
-
-        // dd($this->students);
-        // dd($selected->classroom_id);
     }
 
     public function saveGrade($studentId, $assignmentId, $grade)
@@ -47,7 +32,6 @@ class Grade extends Component
         $grade = (int) $grade;
         $teacherId = auth()->user()->teacher->id;
         $subjectId = \App\Models\ClassSubjectTeacher::find($this->selectedClassSubjectTeacher)->subject_id;
-        // dd($subjectId);
 
         // Validate score
         if (! is_numeric($grade) || $grade < 0 || $grade > 20) {
@@ -68,20 +52,22 @@ class Grade extends Component
             ]
         );
 
-        // dd($grade);
     }
 
     #[Layout('layouts.app')]
     public function render()
     {
 
-        // dd($this->selectedClassSubjectTeacher);
         $teacherId = auth()->user()->teacher->id;
+
+        $students = $this->classroomId
+            ? \App\Models\Student::where('classroom_id', $this->classroomId)->paginate(20)
+            : new \Illuminate\Pagination\LengthAwarePaginator([], 0, 20);
 
         return view('livewire.grade', [
             'grades' => \App\Models\Grade::all(),
             'classSubjectTeachers' => \App\Models\ClassSubjectTeacher::with(['class', 'subject', 'teacher'])->where('teacher_id', $teacherId)->get(),
-            'students' => $this->students,
+            'students' => $students,
             'assignments' => \App\Models\Assignment::all(),
         ]);
     }
