@@ -1,7 +1,7 @@
 <div class="p-6 mt-10 bg-white rounded shadow">
 
     <div class="my-4">
-        <label class="block mb-2 font-medium text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
+        <label class="block mb-2 font-bold text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
         <select wire:model.live="selectedClassSubjectTeacher" class="w-full p-2 border border-gray-300 rounded">
             <option value="">{{ __('Sélectionner une classe et une matière') }}</option>
             @foreach ($classSubjectTeachers as $cst)
@@ -15,7 +15,7 @@
     @if ($students && $assignments)
         <div class="overflow-x-auto">
             <table class="w-full mt-6 border table-auto">
-                <thead class="bg-gray-100">
+                <thead class="bg-gray-100 font-extrabold">
                     <tr>
                         <th class="p-2 text-left">Student</th>
                         @foreach ($assignments as $assignment)
@@ -27,7 +27,7 @@
                     @if ($students && $students->count() > 0)
                         @foreach ($students as $student)
                             <tr class="border-t">
-                                <td class="p-2">{{ $student->first_name }}
+                                <td class="p-2 font-bold">{{ $student->first_name }}
                                     {{ $student->last_name }}</td>
                                 @foreach ($assignments as $assignment)
                                     <td class="p-2">
