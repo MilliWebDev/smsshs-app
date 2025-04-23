@@ -1,12 +1,13 @@
 <div class="p-6 mt-10 bg-white rounded shadow">
 
     <div class="my-4">
-        <label class="block mb-2 font-bold text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
+        <label
+            class="block mb-2 font-bold text-lg text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
         <select wire:model.live="selectedClassSubjectTeacher" class="w-full p-2 border border-gray-300 rounded">
             <option value="">{{ __('Sélectionner une classe et une matière') }}</option>
             @foreach ($classSubjectTeachers as $cst)
                 <option value="{{ $cst->id }}">
-                    {{ $cst->class->name }} - {{ $cst->subject->name }}
+                    <span class='font-bold text-lg'> {{ $cst->class->name }} - {{ $cst->subject->name }} </span>
                 </option>
             @endforeach
         </select>
@@ -15,7 +16,7 @@
     @if ($students && $assignments)
         <div class="overflow-x-auto">
             <table class="w-full mt-6 border table-auto">
-                <thead class="bg-gray-100 font-extrabold">
+                <thead class="bg-gray-100 text-lg font-extrabold">
                     <tr>
                         <th class="p-2 text-left">Student</th>
                         @foreach ($assignments as $assignment)
@@ -27,8 +28,8 @@
                     @if ($students && $students->count() > 0)
                         @foreach ($students as $student)
                             <tr class="border-t">
-                                <td class="p-2 font-bold">{{ $student->first_name }}
-                                    {{ $student->last_name }}</td>
+                                <td class="p-2 "><span class='font-bold text-lg'>{{ $student->first_name }}
+                                        {{ $student->last_name }}</span></td>
                                 @foreach ($assignments as $assignment)
                                     <td class="p-2">
                                         <input type="number" min="0" max="20"
@@ -41,7 +42,8 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="{{ $assignments ? $assignments->count() + 1 : 2 }}" class="p-2 text-center">
+                            <td colspan="{{ $assignments ? $assignments->count() + 1 : 2 }}"
+                                class="p-2 text-center font-bold text-lg">
                                 {{ __('Aucun apprenant ou matière trouvé') }}.
                             </td>
                         </tr>
