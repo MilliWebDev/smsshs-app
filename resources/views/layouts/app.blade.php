@@ -265,52 +265,54 @@
             <aside
                 class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 pt-14 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="h-full px-3 py-5 overflow-y-auto bg-white dark:bg-gray-800">
-                    <ul class="mt-4 space-y-2">
-                        <li>
-                            <a href="{{ route('dashboard') }}"
-                                class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    @can('admin-access')
+                        <ul class="mt-4 space-y-2">
+                            <li>
+                                <a href="{{ route('dashboard') }}"
+                                    class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Dashboard') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('dashboard') }}"
-                                class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <span class="ml-3">{{ __('Dashboard') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('dashboard') }}"
+                                    class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Parents') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('students') }}"
-                                class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <span class="ml-3">{{ __('Parents') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('students') }}"
+                                    class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Apprenants') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('classroom') }}"
-                                class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <span class="ml-3">{{ __('Apprenants') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('classroom') }}"
+                                    class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Salle de classe') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('assign-subject') }}"
-                                class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <span class="ml-3">{{ __('Salle de classe') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('assign-subject') }}"
+                                    class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Matières') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('assignmentview') }}"
-                                class="{{ request()->routeIs('assignmentview') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <span class="ml-3">{{ __('Matières') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('assignmentview') }}"
+                                    class="{{ request()->routeIs('assignmentview') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                <span class="ml-3">{{ __('Devoir scolaire') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <x-section-border />
-                    <ul>
+                                    <span class="ml-3">{{ __('Devoir scolaire') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <x-section-border />
+                    @endcan
+                    <ul class="mt-5">
                         <li>
                             <a href="{{ route('grades') }}"
                                 class="{{ request()->routeIs('grades') ? 'border border-blue-800' : '' }} flex items-center p-2 text-base font-medium text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
