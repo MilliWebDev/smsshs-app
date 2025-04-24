@@ -36,7 +36,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span>{{ __('Créer un devoir') }}</span>
+            <span class='text-lg font-bold'>{{ __('Créer un devoir') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -74,10 +74,10 @@
                     <form class="mt-5" wire:submit="createAssignment">
                         <div>
                             <label for="title"
-                                class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Titre') }}</label>
+                                class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Titre') }}</label>
                             <input placeholder="Devoir de mathématiques" type="text" wire:model="title"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                @error('title')
+                            @error('title')
                                 <p class="mt-1 text-sm text-red-600">
                                     {{ __('Veillez entrer un titre') }}</p>
                             @enderror
@@ -85,21 +85,21 @@
 
                         <div class="mt-4">
                             <label for="description"
-                                class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
+                                class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                             <textarea placeholder="Devoir de mathématiques" wire:model="description"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
-                                @error('description')
+                            @error('description')
                                 <p class="mt-1 text-sm text-red-600">
                                     {{ __('Veillez entrer une description') }}</p>
                             @enderror
                         </div>
 
-                            <div class="flex justify-end mt-6">
-                                <button type="submit"
-                                    class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                    {{ __('Validez') }}
-                                </button>
-                            </div>
+                        <div class="flex justify-end mt-6">
+                            <button type="submit"
+                                class="px-3 py-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                {{ __('Validez') }}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -111,15 +111,15 @@
             <thead>
                 <tr>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Devoirs') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Description') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Actions') }}
                     </th>
                 </tr>
@@ -128,10 +128,10 @@
                 @foreach ($assignments as $assignment)
                     <tr class="border" wire:key="{{ $assignment->id }}">
                         <td class="px-4 py-2 ">
-                            {{ $assignment->title }}
+                            <span class='text-lg font-bold'> {{ $assignment->title }}</span>
                         </td>
                         <td class="px-4 py-2 ">
-                            {{ $assignment->description }}
+                            <span class='text-lg font-bold'> {{ $assignment->description }}</span>
                         </td>
                         <td class="flex items-baseline gap-2 px-4 py-2">
                             <div class="" x-data="{ modelOpen2: false }">
@@ -143,7 +143,7 @@
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
                                     </svg>
-                                    <span>{{ __('Modifier') }}</span>
+                                    <span class='text-lg font-bold'>{{ __('Modifier') }}</span>
                                 </button>
 
                                 <div x-show="modelOpen2" class="fixed inset-0 z-50 overflow-y-auto"
@@ -189,32 +189,33 @@
 
                                                 <div>
                                                     <label for="title"
-                                                        class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Titre') }}</label>
-                                                    <input placeholder="Devoir de mathématiques" type="text" wire:model="title"
+                                                        class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Titre') }}</label>
+                                                    <input placeholder="Devoir de mathématiques" type="text"
+                                                        wire:model="title"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                                        @error('title')
+                                                    @error('title')
                                                         <p class="mt-1 text-sm text-red-600">
                                                             {{ __('Veillez entrer un titre') }}</p>
                                                     @enderror
                                                 </div>
-                        
+
                                                 <div class="mt-4">
                                                     <label for="description"
-                                                        class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
+                                                        class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                                                     <textarea placeholder="Devoir de mathématiques" wire:model="description"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
-                                                        @error('description')
+                                                    @error('description')
                                                         <p class="mt-1 text-sm text-red-600">
                                                             {{ __('Veillez entrer une description') }}</p>
                                                     @enderror
                                                 </div>
-                        
-                                                    <div class="flex justify-end mt-6">
-                                                        <button type="submit"
-                                                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                                            {{ __('Mettre à jour') }}
-                                                        </button>
-                                                    </div>
+
+                                                <div class="flex justify-end mt-6">
+                                                    <button type="submit"
+                                                        class="px-3 py-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                                        {{ __('Mettre à jour') }}
+                                                    </button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -229,7 +230,7 @@
                                         d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
                                     </path>
                                 </svg>
-                                <span>{{ __('Supprimer') }}</span>
+                                <span class='text-lg font-bold'>{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>

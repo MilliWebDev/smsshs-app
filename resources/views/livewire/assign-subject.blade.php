@@ -36,7 +36,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span class='font-bold text-lg'>{{ __('Créer une matière') }}</span>
+            <span class='text-lg font-bold'>{{ __('Créer une matière') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -75,7 +75,7 @@
 
                         <div>
                             <label for="subject_name"
-                                class="block font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
+                                class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                             <input placeholder="Math" type="text" wire:model="subject_name"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                             @error('subject_name')
@@ -85,7 +85,7 @@
 
                         <div class="mt-4">
                             <label for="subject_description"
-                                class="block font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
+                                class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                             <textarea placeholder="Math is the study of numbers, shapes, and patterns." wire:model="subject_description"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
                             @error('subject_description')
@@ -97,7 +97,7 @@
                             <div class="" x-data="{ show: false }">
                                 <a href="#" x-on:click.prevent="show = !show"
                                     class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                    <span class="inline-block font-bold text-lg">{{ __('Sélectionner classes') }}</span>
+                                    <span class="inline-block text-lg font-bold">{{ __('Sélectionner classes') }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor"
                                         class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
@@ -112,7 +112,7 @@
                                         <div>
                                             <input wire:model='class_id' type="checkbox" name="type[]"
                                                 value="{{ $class->id }}" class="inline-block mr-2" /><span
-                                                class='font-bold text-lg'>{{ $class->name }}</span>
+                                                class='text-lg font-bold'>{{ $class->name }}</span>
                                         </div>
                                     @endforeach
                                 </div>
@@ -128,7 +128,7 @@
                                 <a href="#" x-on:click.prevent="show = !show"
                                     class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                     <span
-                                        class="inline-block font-bold text-lg">{{ __('Sélectionner enseignants') }}</span>
+                                        class="inline-block text-lg font-bold">{{ __('Sélectionner enseignants') }}</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke="currentColor"
                                         class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
@@ -143,7 +143,7 @@
                                         <div>
                                             <input wire:model='teacher_id' type="checkbox" name="type[]"
                                                 value="{{ $item->id }}" class="inline-block mr-2 " /><span
-                                                class='font-bold text-lg'>{{ $item->user->first_name }}
+                                                class='text-lg font-bold'>{{ $item->user->first_name }}
                                                 -{{ $item->user->last_name }}</span>
                                         </div>
                                     @endforeach
@@ -173,19 +173,19 @@
             <thead>
                 <tr>
                     <th
-                        class="px-4 py-2 text-xl font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Matières') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xl font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Enseignants') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xl font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Classes') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xl font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Actions') }}
                     </th>
                 </tr>
@@ -193,7 +193,7 @@
             <tbody>
                 @foreach ($class_subject_teachers as $subject_id => $items)
                     <tr class="border" wire:key="{{ $subject_id }}">
-                        <td class="px-4 py-2 font-bold text-lg">
+                        <td class="px-4 py-2 text-lg font-bold">
                             {{ $items->first()->subject->name }}
                         </td>
                         <td class="px-4 py-2 ">
@@ -202,7 +202,7 @@
                                     @if ($item->teacher && $item->teacher->user)
                                         <li>
                                             <span
-                                                class="inline-block px-2 py-1 mb-1 mr-1 font-bold text-lg text-blue-800 bg-blue-100 rounded-full">
+                                                class="inline-block px-2 py-1 mb-1 mr-1 text-lg font-bold text-blue-800 bg-blue-100 rounded-full">
                                                 {{ $item->teacher->user->first_name }}
                                                 {{ $item->teacher->user->last_name }}
                                             </span>
@@ -215,7 +215,7 @@
                             @foreach ($items->unique('classroom_id') as $item)
                                 @if ($item->class)
                                     <span
-                                        class="inline-block px-2 py-1 mb-1 mr-1 font-bold text-lg text-blue-800 bg-blue-100 rounded-full">
+                                        class="inline-block px-2 py-1 mb-1 mr-1 text-lg font-bold text-blue-800 bg-blue-100 rounded-full">
                                         {{ $item->class->name }}
                                     </span>
                                 @endif
@@ -231,7 +231,7 @@
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
                                     </svg>
-                                    <span class='font-bold text-lg'>{{ __('Modifier') }}</span>
+                                    <span class='text-lg font-bold'>{{ __('Modifier') }}</span>
                                 </button>
 
                                 <div x-show="modelOpen2" class="fixed inset-0 z-50 overflow-y-auto"
@@ -277,7 +277,7 @@
 
                                                 <div>
                                                     <label for="subject_name"
-                                                        class="block font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
+                                                        class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                                                     <input placeholder="Math" type="text"
                                                         wire:model="subject_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
@@ -289,7 +289,7 @@
 
                                                 <div class="mt-4">
                                                     <label for="subject_description"
-                                                        class="block font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
+                                                        class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Description') }}</label>
                                                     <textarea placeholder="Math is the study of numbers, shapes, and patterns." wire:model="subject_description"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
                                                     @error('subject_description')
@@ -303,7 +303,7 @@
                                                         <a href="#" x-on:click.prevent="show = !show"
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                             <span
-                                                                class="inline-block font-bold text-lg">{{ __('Sélectionner classes') }}</span>
+                                                                class="inline-block text-lg font-bold">{{ __('Sélectionner classes') }}</span>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke="currentColor"
                                                                 class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
@@ -319,7 +319,7 @@
                                                                     <input wire:model='class_id' type="checkbox"
                                                                         name="type[]" value="{{ $class->id }}"
                                                                         class="inline-block mr-2" /><span
-                                                                        class='font-bold text-lg'>{{ $class->name }}</span>
+                                                                        class='text-lg font-bold'>{{ $class->name }}</span>
                                                                 </div>
                                                             @endforeach
                                                         </div>
@@ -335,7 +335,7 @@
                                                         <a href="#" x-on:click.prevent="show = !show"
                                                             class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                             <span
-                                                                class="inline-block font-bold text-lg">{{ __('Sélectionner enseignants') }}</span>
+                                                                class="inline-block text-lg font-bold">{{ __('Sélectionner enseignants') }}</span>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke="currentColor"
                                                                 class="inline-block w-4 h-4 transition duration-150 transform stroke-current"
@@ -351,14 +351,14 @@
                                                                     <input wire:model='teacher_id' type="checkbox"
                                                                         name="type[]" value="{{ $item->id }}"
                                                                         class="inline-block mr-2" /><span
-                                                                        class='font-bold text-lg'>{{ $item->user->first_name }}
+                                                                        class='text-lg font-bold'>{{ $item->user->first_name }}
                                                                         -{{ $item->user->last_name }}</span>
                                                                 </div>
                                                             @endforeach
                                                         </div>
                                                     </div>
                                                     @error('teacher_id')
-                                                        <p class="mt-1 font-bold text-lg text-red-600">
+                                                        <p class="mt-1 text-lg font-bold text-red-600">
                                                             {{ __('Veillez sélectionner un enseignant') }}</p>
                                                     @enderror
                                                 </div>
@@ -366,7 +366,7 @@
 
                                                 <div class="flex justify-end mt-6">
                                                     <button type="submit"
-                                                        class="px-3 py-2 font-bold text-lg tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                                        class="px-3 py-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
                                                         {{ __('Mettre à jour') }}
                                                     </button>
                                                 </div>
@@ -384,7 +384,7 @@
                                         d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
                                     </path>
                                 </svg>
-                                <span class='font-bold text-lg'>{{ __('Supprimer') }}</span>
+                                <span class='text-lg font-bold'>{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>
