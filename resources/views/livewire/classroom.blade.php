@@ -37,7 +37,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span>{{ __('Create a classroom') }}</span>
+            <span class=' font-bold text-lg'>{{ __('Ajouter une classe') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -57,7 +57,7 @@
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                     <div class="flex items-center justify-between space-x-4">
-                        <h1 class="text-xl font-medium text-gray-800 ">{{ __('Create a new classroom') }}</h1>
+                        <h1 class="text-xl font-medium text-gray-800 ">{{ __('Ajouter une classe') }}</h1>
 
                         <button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -69,19 +69,19 @@
                     </div>
 
                     <p class="mt-2 text-sm text-gray-500 ">
-                        {{ __('Add teachers to classroom') }}
+                        {{ __('Ajouter un enseignant') }}
                     </p>
 
                     <form class="mt-5" wire:submit="createClassroom">
 
                         <div>
                             <label for="class_name"
-                                class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Classroom Name') }}</label>
+                                class="block  font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                             <input placeholder="CE2" type="text" wire:model="class_name"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                         </div>
-                        <h1 class="block mt-5 text-sm text-gray-700 capitalize dark:text-gray-200">
-                            {{ __('Select teachers') }}
+                        <h1 class="block mt-5  font-bold text-lg text-gray-700 capitalize dark:text-gray-200">
+                            {{ __('Enseignants') }}
                             <div class="mt-5 space-y-2">
                                 @foreach ($teachers as $teacher)
                                     <label
@@ -94,64 +94,11 @@
                                 @endforeach
                             </div>
 
-                            <div class="mt-4">
-                                <h1 class="text-xs font-medium text-gray-400 uppercase">Permissions</h1>
-
-                                <div class="mt-4 space-y-5">
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: true }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can make task</p>
-                                    </div>
-
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: false }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can delete task</p>
-                                    </div>
-
-                                    <div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: true }"
-                                        @click="show =!show">
-                                        <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                            :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                            <label for="show" @click="show =!show"
-                                                class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                :class="[show ? 'translate-x-full border-indigo-500' :
-                                                    'translate-x-0 border-gray-300'
-                                                ]"></label>
-                                            <input type="checkbox" name="show"
-                                                class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                        </div>
-
-                                        <p class="text-gray-500">Can edit task</p>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
                             <div class="flex justify-end mt-6">
                                 <button type="submit"
                                     class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                    {{ __('Create a classroom') }}
+                                    {{ __('Validez') }}
                                 </button>
                             </div>
                     </form>
