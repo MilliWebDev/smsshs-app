@@ -191,7 +191,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($class_subject_teachers as $subject_id => $items)
+                @foreach ($class_subject_teachers->groupBy('subject_id') as $subject_id => $items)
                     <tr class="border" wire:key="{{ $subject_id }}">
                         <td class="px-4 py-2 text-lg font-bold">
                             {{ $items->first()->subject->name }}
@@ -391,6 +391,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-4">
+            {{ $class_subject_teachers->links() }}
+        </div>
     </div>
 
 </div>

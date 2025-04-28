@@ -9,9 +9,12 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AssignSubject extends Component
 {
+    use WithPagination;
+
     public $class_id = [];
 
     public $subject_name;
@@ -154,8 +157,8 @@ class AssignSubject extends Component
             'teachers' => \App\Models\Teachers::all(),
             'subjects' => \App\Models\Subject::all(),
             'classes' => \App\Models\Classe::all(),
-            'class_subject_teachers' => \App\Models\ClassSubjectTeacher::with(['class', 'subject', 'teacher'])->get()
-                ->groupBy('subject_id'),
+            'class_subject_teachers' => \App\Models\ClassSubjectTeacher::with(['class', 'subject', 'teacher'])->paginate(50),
+
         ]);
     }
 }
