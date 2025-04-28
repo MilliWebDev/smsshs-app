@@ -37,7 +37,7 @@
                     clip-rule="evenodd" />
             </svg>
 
-            <span class=' font-bold text-lg'>{{ __('Ajouter une classe') }}</span>
+            <span class='text-lg font-bold '>{{ __('Ajouter une classe') }}</span>
         </button>
 
         <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -76,11 +76,11 @@
 
                         <div>
                             <label for="class_name"
-                                class="block  font-bold text-lg text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
+                                class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                             <input placeholder="CE2" type="text" wire:model="class_name"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                         </div>
-                        <h1 class="block mt-5  font-bold text-lg text-gray-700 capitalize dark:text-gray-200">
+                        <h1 class="block mt-5 text-lg font-bold text-gray-700 capitalize dark:text-gray-200">
                             {{ __('Enseignants') }}
                             <div class="mt-5 space-y-2">
                                 @foreach ($teachers as $teacher)
@@ -94,7 +94,7 @@
                                 @endforeach
                             </div>
 
-                            
+
                             <div class="flex justify-end mt-6">
                                 <button type="submit"
                                     class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
@@ -114,16 +114,16 @@
             <thead>
                 <tr>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Classroom
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        {{ __('Salle de classes') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Teachers
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        {{ __('Enseignants') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
-                        Actions
+                        class="px-4 py-2 text-lg font-extrabold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        {{ __('Actions') }}
                     </th>
                 </tr>
             </thead>
