@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Classroom extends Component
 {
+    use WithPagination;
+
     public $selectedTeachers = [];
 
     public $class_name;
@@ -34,11 +37,11 @@ class Classroom extends Component
                 $class->teachers()->attach($this->selectedTeachers);
             });
 
-            return redirect('/classroom')->with('message', 'Class Created'); // or wherever you want to redirect
+            return redirect('/classroom')->with('message', 'Salle de classe crée'); // or wherever you want to redirect
 
         } catch (\Exception $e) {
 
-            return redirect('/classroom')->with('error', 'Class Not Created: '.$e->getMessage()); // Preserves form input on error
+            return redirect('/classroom')->with('error', 'Salle de classe non-crée '.$e->getMessage()); // Preserves form input on error
         }
     }
 
@@ -78,12 +81,20 @@ class Classroom extends Component
                 $class->teachers()->sync($this->selectedTeachers);
             });
 
-            return redirect('/classroom')->with('message', 'Class Modified'); // or wherever you want to redirect
+            return redirect('/classroom')->with('message', 'Salle de classe modifiée'); // or wherever you want to redirect
 
         } catch (\Exception $e) {
 
-            return redirect('/classroom')->with('error', 'Class Not Created: '.$e->getMessage()); // Preserves form input on error
+            return redirect('/classroom')->with('error', 'Salle de classe non crée: '.$e->getMessage()); // Preserves form input on error
         }
+    }
+
+    public function delete($id)
+    {
+        $record = \App\Models\Classe::find($id);
+        $record->delete();
+
+        return redirect('/classroom')->with('message', 'Salle de classe supprimée'); // or wherever you want to redirect
     }
 
     #[Layout('layouts.app')]
@@ -91,7 +102,7 @@ class Classroom extends Component
     {
         return view('livewire.classroom', [
             'teachers' => \App\Models\Teachers::all(),
-            'classrooms' => \App\Models\Classe::with('teachers')->get(),
+            'classrooms' => \App\Models\Classe::with('teachers')->paginate(10),
         ]);
     }
 }

@@ -129,29 +129,29 @@
             </thead>
             <tbody>
                 @foreach ($classrooms as $classroom)
-                    <tr>
+                    <tr class="border">
                         <td class="px-4 py-2 border-b border-gray-200">
-                            {{ $classroom->name }}
+                            <span class="text-lg font-bold"> {{ $classroom->name }}</span>
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             @foreach ($classroom->teachers as $teacher)
                                 <span
-                                    class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                    class="inline-block px-2 py-1 mb-1 mr-1 text-lg font-bold text-blue-800 bg-blue-100 rounded-full">
                                     {{ $teacher->user->first_name }}
                                 </span>
                             @endforeach
                         </td>
-                        <td class="px-4 py-2 border-b border-gray-200">
+                        <td class="flex items-baseline gap-2 px-4 py-2">
                             <div class="" x-data="{ modelOpen2: false }">
                                 <button wire:click="$dispatch('update-created', { id:' {{ $classroom->id }}' })"
                                     @click="modelOpen2 = !modelOpen2"
                                     class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
                                     </svg>
-                                    <span>{{ __('Edit') }}</span>
+                                    <span class='text-lg font-bold'>{{ __('Modifier') }}</span>
                                 </button>
 
                                 <div x-show="modelOpen2" class="fixed inset-0 z-50 overflow-y-auto"
@@ -176,7 +176,7 @@
                                             class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                                             <div class="flex items-center justify-between space-x-4">
                                                 <h1 class="text-xl font-medium text-gray-800 ">
-                                                    {{ __('Create a new classroom') }}</h1>
+                                                    {{ __('Salle de classe') }}</h1>
 
                                                 <button @click="modelOpen2 = false"
                                                     class="text-gray-600 focus:outline-none hover:text-gray-700">
@@ -190,20 +190,20 @@
                                             </div>
 
                                             <p class="mt-2 text-sm text-gray-500 ">
-                                                {{ __('Add teachers to classroom') }}
+                                                {{ __('Modifier informations') }}
                                             </p>
 
                                             <form class="mt-5" wire:submit.prevent="update">
 
                                                 <div>
                                                     <label for="class_name"
-                                                        class="block text-sm text-gray-700 capitalize dark:text-gray-200">{{ __('Classroom Name') }}</label>
+                                                        class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                                                     <input placeholder="CE2" type="text" wire:model="class_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                                 </div>
                                                 <h1
-                                                    class="block mt-5 text-sm text-gray-700 capitalize dark:text-gray-200">
-                                                    {{ __('Select teachers') }}
+                                                    class="block mt-5 text-lg font-bold text-gray-700 capitalize dark:text-gray-200">
+                                                    {{ __('Enseignants') }}
                                                     <div class="mt-5 space-y-2">
                                                         @foreach ($teachers as $teacher)
                                                             <label
@@ -217,65 +217,11 @@
                                                         @endforeach
                                                     </div>
 
-                                                    <div class="mt-4">
-                                                        <h1 class="text-xs font-medium text-gray-400 uppercase">
-                                                            Permissions</h1>
-
-                                                        <div class="mt-4 space-y-5">
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: true }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
-
-                                                                <p class="text-gray-500">Can make task</p>
-                                                            </div>
-
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: false }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
-
-                                                                <p class="text-gray-500">Can delete task</p>
-                                                            </div>
-
-                                                            <div class="flex items-center space-x-3 cursor-pointer"
-                                                                x-data="{ show: true }" @click="show =!show">
-                                                                <div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full"
-                                                                    :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
-                                                                    <label for="show" @click="show =!show"
-                                                                        class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer"
-                                                                        :class="[show ? 'translate-x-full border-indigo-500' :
-                                                                            'translate-x-0 border-gray-300'
-                                                                        ]"></label>
-                                                                    <input type="checkbox" name="show"
-                                                                        class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none" />
-                                                                </div>
-
-                                                                <p class="text-gray-500">Can edit task</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
                                                     <div class="flex justify-end mt-6">
                                                         <button type="submit"
-                                                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
-                                                            {{ __('Update') }}
+                                                            class="px-3 py-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                                            {{ __('Modifier') }}
                                                         </button>
                                                     </div>
                                             </form>
@@ -283,14 +229,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="flex items-center space-x-2 text-red-600 hover:text-red-800">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-2 h-2" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a1 1 0 011-1h6a1 1 0 011 1h3a1 1 0 110 2H2a1 1 0 110-2h3zm3 4a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v7a1 1 0 102 0V7a1 1 0 00-1-1zM4 6a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1H4zm10 0a1 1 0 011 1v7a1 1 0 102 0V7a1 1 0 00-1-1h-1z"
-                                        clip-rule="evenodd" />
+                            <button wire:click="delete('{{ $classroom->id }}')"
+                                wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer cette matière ?') }}\n\n{{ __('appuyer supprimer ') }}|supprimer'
+                                class="flex items-center space-x-2 text-red-600 hover:text-red-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
+                                    </path>
                                 </svg>
-                                <span>{{ __('Delete') }}</span>
+                                <span class='text-lg font-bold'>{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>
@@ -300,5 +248,7 @@
     </div>
 
     <!-- Pagination -->
-
+    <div class="mt-4">
+        {{ $classrooms->links() }}
+    </div>
 </div>
