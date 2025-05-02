@@ -32,4 +32,5 @@ Route::middleware([
     Route::get('/students', StudentsView::class)->name('students');
     Route::get('/assign-subject', \App\Livewire\AssignSubject::class)->name('assign-subject');
     Route::get('/assignmentview', \App\Livewire\Assignmentview::class)->name('assignmentview');
+    Route::get('/timetable', \App\Livewire\TimeTableView::class)->name('timetable');
 });
