@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="font-latobold antialiased">
+<body class="antialiased font-latobold">
     <x-banner />
 
     <div class="min-h-screen bg-[#F5F5F5] dark:bg-gray-900">
@@ -305,6 +305,34 @@
 
                                     <span class="ml-3">{{ __('Devoir scolaire') }}</span>
                                 </a>
+                            </li>
+                            <li>
+                                <div x-data="{ open: false }">
+                                    <button @click="open = !open" type="button"
+                                        class="inline-flex justify-between w-full px-4 py-2 text-lg font-bold tracking-wide text-white bg-blue-800 hover:bg-blue-700 focus:outline-2 focus:ring-red-300">
+                                        <span class="flex-1 text-center">{{ __('Ajouter') }}</span>
+                                        <svg :class="{ 'rotate-180': open }"
+                                            class="inline-flex justify-center w-5 h-5 ml-2 transition-transform duration-200 transform"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                        </svg>
+
+                                    </button>
+
+                                    <div x-show="open" @click.away="open = false" x-transition
+                                        class="absolute w-56 mt-2 transform -translate-x-1/2 bg-white rounded-md shadow-lg left-1/2 ring-1 ring-black ring-opacity-5">
+                                        <div class="py-1">
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                         <x-section-border />
