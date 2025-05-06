@@ -10,7 +10,7 @@ use Livewire\Attributes\On;
 class Assignmentview extends Component
 {
 
-    public $title,$description,$selectedId,$title_semester,$start_date,$end_date;
+    public $title,$description,$selectedId,$title_semester,$start_date,$end_date,$selectedSemesterId;
 
     public function createAssignment()
     {
@@ -74,6 +74,49 @@ class Assignmentview extends Component
         }
     }
 
+    #[On('update2-created')]
+    public function selectSemester($id)
+    {
+        $cleanId = strtolower(trim($id));
+        $this->selectedSemesterId = $cleanId;
+        $semester = Semester::find($id);
+        if ($semester) {
+            $this->title_semester = $semester->name;
+            $this->start_date = $semester->start_date;
+            $this->end_date = $semester->end_date;
+        }
+    }
+
+
+    public function updateSemester()
+    {
+        $this->validate([
+            'title_semester' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $semester = Semester::find($this->selectedSemesterId);
+        if ($semester) {
+            $semester->update([
+                'name' => $this->title_semester,
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
+            ]);
+            return redirect('/assignmentview')->with('message', 'Semestre mis à jour'); // or wherever you want to redirect
+        }
+    }
+    
+    public function deleteSemester($id)
+    {
+        $semester = Semester::find($id);
+        if ($semester) {
+            $semester->delete();
+            return redirect('/assignmentview')->with('message', 'Semestre supprimé'); // or wherever you want to redirect
+        }
+    }
+
+
     public function update()
     {
         $this->validate([
@@ -97,6 +140,7 @@ class Assignmentview extends Component
     {
         return view('livewire.assignmentview', [
             'assignments' => Assignment::all(),
+            'semesters' => Semester::all(),
         ]);
     }
 }
