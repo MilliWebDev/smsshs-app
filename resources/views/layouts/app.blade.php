@@ -274,7 +274,7 @@
                             <li>
                                 <div x-data="{ open: false }">
                                     <button @click="open = !open" type="button"
-                                        class="inline-flex justify-between w-full px-4 py-2 text-lg font-bold tracking-wide border rounded-lg text-white bg-blue-800 hover:bg-blue-700 focus:outline-2 focus:ring-red-300">
+                                        class="inline-flex justify-between w-full px-4 py-2 text-lg font-bold tracking-wide text-white bg-blue-800 border rounded-lg hover:bg-blue-700 focus:outline-2 focus:ring-red-300">
                                         <span>{{ __('Ajouter') }}</span>
                                         <svg :class="{ 'rotate-180': open }"
                                             class="inline-flex justify-center w-6 h-5 ml-2 transition-transform duration-200 transform"
@@ -292,28 +292,29 @@
                                             <a href="{{ route('dashboard') }}" wire:navigate
                                                 class="{{ request()->routeIs('dashboard') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                                 <span class="ml-3">{{ __('Parents') }}</span>
-                                             </a>
-                                             <a href="{{ route('students') }}" wire:navigate
-                                             class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-         
-                                             <span class="ml-3">{{ __('Apprenants') }}</span>
-                                         </a>
-                                             <a href="{{ route('classroom') }}" wire:navigate
-                                             class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-         
-                                             <span class="ml-3">{{ __('Salle de classe') }}</span>
-                                         </a>
-                                             <a href="{{ route('assign-subject') }}" wire:navigate
-                                             class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-         
-                                             <span class="ml-3">{{ __('Matières') }}</span>
-                                         </a>
-                                                <a href="{{ route('assignmentview') }}" wire:navigate
+                                                <span class="ml-3">{{ __('Parents') }}</span>
+                                            </a>
+                                            <a href="{{ route('classroom') }}" wire:navigate
+                                                class="{{ request()->routeIs('classroom') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                                <span class="ml-3">{{ __('Salle de classe') }}</span>
+                                            </a>
+                                            <a href="{{ route('students') }}" wire:navigate
+                                                class="{{ request()->routeIs('students') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                                <span class="ml-3">{{ __('Apprenants') }}</span>
+                                            </a>
+
+                                            <a href="{{ route('assign-subject') }}" wire:navigate
+                                                class="{{ request()->routeIs('assign-subject') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+
+                                                <span class="ml-3">{{ __('Matières') }}</span>
+                                            </a>
+                                            <a href="{{ route('assignmentview') }}" wire:navigate
                                                 class="{{ request()->routeIs('assignmentview') ? 'border border-blue-800' : '' }} flex items-center p-2 font-bold text-lg tracking-wide  text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            
+
                                                 <span class="ml-3">{{ __('Devoir scolaire') }}</span>
-                                                </a>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
