@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('classes', function (Blueprint $table) {
-            $table->string('name')->unique()->index()->change();
+        Schema::table('grades', function (Blueprint $table) {
+            $table->foreignUuid('semester_id')->after('subject_id')->constrained()->onDelete('cascade');
+    
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('classes', function (Blueprint $table) {
-            $table->dropUnique('classes_name_unique');
+        Schema::table('grades', function (Blueprint $table) {
+            $table->dropForeign(['semester_id']);
+            $table->dropColumn('semester_id');
         });
     }
 };
