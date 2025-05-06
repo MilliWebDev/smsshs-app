@@ -79,6 +79,10 @@
                                 class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                             <input placeholder="CE2" type="text" wire:model="class_name"
                                 class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                @error('class_name')
+                                <p class="mt-1 text-sm text-red-600">
+                                    {{ __('Veillez entrer un nom') }}</p>
+                            @enderror
                         </div>
                         <h1 class="block mt-5 text-lg font-bold text-gray-700 capitalize dark:text-gray-200">
                             {{ __('Enseignants') }}
@@ -92,6 +96,10 @@
                                         <span>{{ $teacher->user->first_name }}</span>
                                     </label>
                                 @endforeach
+                                @error('selectedTeachers')
+                                <p class="mt-1 text-sm text-red-600">
+                                    {{ __('Sélectionner un enseignant') }}</p>
+                            @enderror
                             </div>
 
 
@@ -207,6 +215,10 @@
                                                         class="block text-lg font-bold text-gray-700 capitalize dark:text-gray-200">{{ __('Nom') }}</label>
                                                     <input placeholder="CE2" type="text" wire:model="class_name"
                                                         class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                                        @error('class_name')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez entrer un nom') }}</p>
+                                                    @enderror
                                                 </div>
                                                 <h1
                                                     class="block mt-5 text-lg font-bold text-gray-700 capitalize dark:text-gray-200">
@@ -222,6 +234,10 @@
                                                                 <span>{{ $teacher->user->last_name }}</span>
                                                             </label>
                                                         @endforeach
+                                                        @error('selectedTeachers')
+                                                        <p class="mt-1 text-sm text-red-600">
+                                                            {{ __('Veillez sélectionner un enseignant') }}</p>
+                                                    @enderror
                                                     </div>
 
 
