@@ -31,10 +31,8 @@ class AssignSubject extends Component
         $this->validate([
             'subject_name' => 'required|string|max:255',
             'subject_description' => 'required|string|max:255',
-            'class_id' => 'required|array',
-            'class_id.*' => 'integer|exists:classes,id',
-            'teacher_id' => 'required|array',
-            'teacher_id.*' => 'integer|exists:teachers,id',
+            'class_id.*' => 'string|exists:classes,id',
+            'teacher_id.*' => 'string|exists:teachers,id',
         ]);
         try {
             DB::transaction(function () {
@@ -88,49 +86,53 @@ class AssignSubject extends Component
     }
 
     public function update()
-    {
+{
+    // Validate the updated data
+    $this->validate([
+        'subject_name' => 'required|string|max:255',
+        'subject_description' => 'required|string|max:255',
+        'class_id' => 'required|array',
+        'teacher_id' => 'required|array',
+    ]);
 
-        $record = \App\Models\Subject::find($this->selectedId);
-        $record->name = $this->subject_name;
-        $record->description = $this->subject_description;
+    // Find the subject record to update
+    $subject = Subject::findOrFail($this->selectedId);
 
-        $this->validate([
-            'subject_name' => 'required|string|max:255',
-            'subject_description' => 'required|string|max:255',
-            'class_id' => 'required|array',
-            'teacher_id' => 'required|array',
-        ]);
+    try {
+        DB::transaction(function () use ($subject) {
+            // Update subject information
+            $subject->update([
+                'name' => $this->subject_name,
+                'description' => $this->subject_description,
+            ]);
 
-        try {
-            DB::transaction(function () {
-                $subject = Subject::findOrFail($this->selectedId);
+            // Remove old pivot records
+            ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
 
-                // Update subject info
-                $subject->update([
-                    'name' => $this->subject_name,
-                    'description' => $this->subject_description,
-                ]);
+            // Ensure unique teacher-class combinations and create new pivot records
+            $uniqueTeachers = array_unique($this->teacher_id);
+            $uniqueClasses = array_unique($this->class_id);
 
-                // Re-create associations
-                // Detach existing associations
-                $subject->classSubjectTeachers()->delete();
-
-                // Attach new associations
-                foreach ($this->class_id as $class) {
-                    foreach ($this->teacher_id as $teacher) {
-                        $subject->classSubjectTeachers()->create([
-                            'classroom_id' => $class,
-                            'teacher_id' => $teacher,
-                        ]);
-                    }
+            foreach ($uniqueClasses as $class) {
+                foreach ($uniqueTeachers as $teacher) {
+                    // This will prevent duplicate records from being inserted
+                    ClassSubjectTeacher::firstOrCreate([
+                        'classroom_id' => $class,
+                        'subject_id' => $subject->id,
+                        'teacher_id' => $teacher,
+                    ]);
                 }
-            });
+            }
+        });
 
-            return redirect('/assign-subject')->with('message', 'Matière modifiée avec succès.');
-        } catch (\Exception $e) {
-            return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
-        }
+        // Redirect after success
+        return redirect('/assign-subject')->with('message', 'Matière modifiée avec succès.');
+    } catch (\Exception $e) {
+        // Handle errors
+        return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
     }
+}
+
 
     public function delete($id)
     {
@@ -138,7 +140,8 @@ class AssignSubject extends Component
 
         if ($subject) {
             // Delete all related records in ClassSubjectTeacher
-            $subject->classSubjectTeachers()->delete();
+            ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
+
 
             // Delete the subject itself
             $subject->delete();
