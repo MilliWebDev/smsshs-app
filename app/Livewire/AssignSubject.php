@@ -32,7 +32,9 @@ class AssignSubject extends Component
             'subject_name' => 'required|string|max:255',
             'subject_description' => 'required|string|max:255',
             'class_id' => 'required|array',
+            'class_id.*' => 'integer|exists:classes,id',
             'teacher_id' => 'required|array',
+            'teacher_id.*' => 'integer|exists:teachers,id',
         ]);
         try {
             DB::transaction(function () {
