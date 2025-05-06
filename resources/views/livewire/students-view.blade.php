@@ -119,7 +119,7 @@
 
                         <div class="flex justify-end mt-6">
                             <button type="submit"
-                                class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                class="px-3 py-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
                                 {{ __('Validez') }}
                             </button>
                         </div>
@@ -136,25 +136,32 @@
             <thead>
                 <tr>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-bold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Apprenants') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-bold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Salle de classes') }}
                     </th>
 
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-bold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Sexe') }}
                     </th>
                     <th
-                        class="px-4 py-2 text-xs font-semibold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
+                        class="px-4 py-2 text-lg font-bold tracking-wider text-left text-gray-600 uppercase border-b border-gray-200 bg-gray-50">
                         {{ __('Actions') }}
                     </th>
                 </tr>
             </thead>
             <tbody>
+                @if ($students->isEmpty())
+                <tr>
+                <td colspan="3" class="px-4 py-2 text-center text-gray-500">
+                    {{ __('Aucun information disponible.') }}
+                </td>
+                </tr>
+               @else
                 @foreach ($students as $student)
                     <tr class="border">
                         <td class="px-4 py-2 border-b border-gray-200">
@@ -299,6 +306,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

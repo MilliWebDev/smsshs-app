@@ -214,6 +214,13 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($assignments->isEmpty())
+                <tr>
+                <td colspan="3" class="px-4 py-2 text-center text-gray-500">
+                    {{ __('Aucun devoir trouvé.') }}
+                </td>
+                </tr>
+               @else
                 @foreach ($assignments as $assignment)
                     <tr class="border" wire:key="{{ $assignment->id }}">
                         <td class="px-4 py-2 ">
@@ -324,6 +331,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>
@@ -352,6 +360,13 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($semesters->isEmpty())
+                <tr>
+                <td colspan="4" class="px-4 py-2 text-center text-gray-500">
+                    {{ __('Aucun semestre trouvé.') }}
+                </td>
+                </tr>
+               @else
                 @foreach ($semesters as $item)
                     <tr class="border" wire:key="{{ $item->id }}">
                         <td class="px-4 py-2 ">
@@ -459,7 +474,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button wire:click="delete('{{ $assignment->id }}')"
+                            <button wire:click="deleteSemester('{{ $item->id }}')"
                                 wire:confirm.prompt='{{ __('Êtes-vous sûr de vouloir supprimer ce devoir ?') }}\n\n{{ __('appuyer supprimer ') }}|supprimer'
                                 class="flex items-center space-x-2 text-red-600 hover:text-red-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20"
@@ -473,6 +488,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

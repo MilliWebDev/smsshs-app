@@ -128,6 +128,13 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($classrooms->isEmpty())
+                <tr>
+                <td colspan="3" class="px-4 py-2 text-center text-gray-500">
+                    {{ __('Aucun information disponible.') }}
+                </td>
+                </tr>
+               @else
                 @foreach ($classrooms as $classroom)
                     <tr class="border">
                         <td class="px-4 py-2 border-b border-gray-200">
@@ -243,6 +250,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

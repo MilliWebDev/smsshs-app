@@ -191,6 +191,13 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($class_subject_teachers->isEmpty())
+                <tr>
+                <td colspan="3" class="px-4 py-2 text-center text-gray-500">
+                    {{ __('Aucun information disponible.') }}
+                </td>
+                </tr>
+               @else
                 @foreach ($class_subject_teachers->groupBy('subject_id') as $subject_id => $items)
                     <tr class="border" wire:key="{{ $subject_id }}">
                         <td class="px-4 py-2 text-lg font-bold">
@@ -389,6 +396,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>
