@@ -86,53 +86,54 @@ class AssignSubject extends Component
     }
 
     public function update()
-{
-    // Validate the updated data
-    $this->validate([
-        'subject_name' => 'required|string|max:255',
-        'subject_description' => 'required|string|max:255',
-        'class_id' => 'required|array',
-        'teacher_id' => 'required|array',
-    ]);
+    {
+        // Validate the updated data
+        $this->validate([
+            'subject_name' => 'required|string|max:255',
+            'subject_description' => 'required|string|max:255',
+            'class_id' => 'required|array',
+            'teacher_id' => 'required|array',
+        ]);
 
-    // Find the subject record to update
-    $subject = Subject::findOrFail($this->selectedId);
+        // Find the subject record to update
+        $subject = Subject::findOrFail($this->selectedId);
 
-    try {
-        DB::transaction(function () use ($subject) {
-            // Update subject information
-            $subject->update([
-                'name' => $this->subject_name,
-                'description' => $this->subject_description,
-            ]);
+        try {
+            DB::transaction(function () use ($subject) {
+                // Update subject information
+                $subject->update([
+                    'name' => $this->subject_name,
+                    'description' => $this->subject_description,
+                ]);
 
-            // Remove old pivot records
-            ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
+                // dd(ClassSubjectTeacher::where('subject_id', $subject->id)->delete());
+                // Remove old pivot records
+                ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
 
-            // Ensure unique teacher-class combinations and create new pivot records
-            $uniqueTeachers = array_unique($this->teacher_id);
-            $uniqueClasses = array_unique($this->class_id);
+                // Ensure unique teacher-class combinations and create new pivot records
+                $uniqueTeachers = array_unique($this->teacher_id);
+                $uniqueClasses = array_unique($this->class_id);
 
-            foreach ($uniqueClasses as $class) {
-                foreach ($uniqueTeachers as $teacher) {
-                    // This will prevent duplicate records from being inserted
-                    ClassSubjectTeacher::firstOrCreate([
-                        'classroom_id' => $class,
-                        'subject_id' => $subject->id,
-                        'teacher_id' => $teacher,
-                    ]);
+                // dd($uniqueTeachers);
+                foreach ($uniqueClasses as $class) {
+                    foreach ($uniqueTeachers as $teacher) {
+                        // This will prevent duplicate records from being inserted
+                        ClassSubjectTeacher::firstOrCreate([
+                            'classroom_id' => $class,
+                            'subject_id' => $subject->id,
+                            'teacher_id' => $teacher,
+                        ]);
+                    }
                 }
-            }
-        });
+            });
 
-        // Redirect after success
-        return redirect('/assign-subject')->with('message', 'Matière modifiée avec succès.');
-    } catch (\Exception $e) {
-        // Handle errors
-        return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
+            // Redirect after success
+            return redirect('/assign-subject')->with('message', 'Matière modifiée avec succès.');
+        } catch (\Exception $e) {
+            // Handle errors
+            return redirect('/assign-subject')->with('error', 'Erreur: '.$e->getMessage());
+        }
     }
-}
-
 
     public function delete($id)
     {
@@ -141,7 +142,6 @@ class AssignSubject extends Component
         if ($subject) {
             // Delete all related records in ClassSubjectTeacher
             ClassSubjectTeacher::where('subject_id', $subject->id)->delete();
-
 
             // Delete the subject itself
             $subject->delete();
