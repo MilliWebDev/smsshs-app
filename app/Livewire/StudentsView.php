@@ -6,9 +6,11 @@ use App\Models\Student;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithPagination;
 
 class StudentsView extends Component
 {
+    use WithPagination;
     public $first_name;
 
     public $last_name;
@@ -56,7 +58,7 @@ class StudentsView extends Component
     {
         $cleanId = strtolower(trim($id));
         $this->selectedId = $cleanId;
-        $student = Student::find($id);
+        $student = Student::find($cleanId);
         if ($student) {
             $this->first_name = $student->first_name;
             $this->last_name = $student->last_name;
@@ -65,6 +67,8 @@ class StudentsView extends Component
             $this->selectedClassroom = $student->classroom_id;
         }
     }
+
+
     public function delete($id)
     {
         $student = Student::find($id);
@@ -73,10 +77,10 @@ class StudentsView extends Component
             return redirect('/students')->with('message', 'Apprenant supprimé');
         }
     }
+    
     public function update()
     {
 
-        
         $this->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -101,7 +105,7 @@ class StudentsView extends Component
     public function render()
     {
         return view('livewire.students-view', [
-            'students' => \App\Models\Student::all(),
+            'students' => \App\Models\Student::paginate(20),
             'classrooms' => \App\Models\Classe::all(),
         ]);
     }

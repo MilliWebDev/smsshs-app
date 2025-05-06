@@ -30,7 +30,7 @@
 
     <div class="flex justify-end w-full h-10" x-data="{ modelOpen: false }">
         <button @click="modelOpen =!modelOpen"
-            class="flex items-center justify-center px-3 py-2 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+            class="flex items-center justify-center px-3 py-2 space-x-2 text-lg font-bold tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
                     d=" M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
@@ -165,17 +165,17 @@
                 @foreach ($students as $student)
                     <tr class="border">
                         <td class="px-4 py-2 border-b border-gray-200">
-                            {{ $student->first_name }} {{ $student->last_name }}
+                            <span class="text-lg font-bold">{{ $student->first_name }} {{ $student->last_name }}</span>
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             <span
-                                class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                class="inline-block px-2 py-1 mb-1 mr-1 text-lg font-bold text-blue-800 bg-blue-100 rounded-full">
                                 {{ $student->classroom->name }}
                             </span>
                         </td>
                         <td class="px-4 py-2 border-b border-gray-200">
                             <span
-                                class="inline-block px-2 py-1 mb-1 mr-1 text-xs text-blue-800 bg-blue-100 rounded-full">
+                                class="inline-block px-2 py-1 mb-1 mr-1 text-lg font-bold text-blue-800 bg-blue-100 rounded-full">
                                 {{ $student->gender }}
                             </span>
                         </td>
@@ -189,7 +189,7 @@
                                         <path
                                             d="M17.414 2.586a2 2 0 010 2.828l-10 10a2 2 0 01-.707.414l-4 1a1 1 0 01-1.265-1.265l1-4a2 2 0 01.414-.707l10-10a2 2 0 012.828 0zm-3.121 2.121L4 15l-.707 2.828L6.828 16l10.293-10.293-3.828-3.828z" />
                                     </svg>
-                                    <span>{{ __('Modifier') }}</span>
+                                    <span class="text-lg font-bold">{{ __('Modifier') }}</span>
                                 </button>
 
                                 <div x-show="modelOpen2" class="fixed inset-0 z-50 overflow-y-auto"
@@ -249,7 +249,7 @@
 
                                                 <div class="mt-4">
                                                     <x-label for="gender" value="{{ __('Sexe') }}" />
-                                                    <select wire:model='gender' name="classroom_id"
+                                                    <select wire:model='gender' name="gender"
                                                         class="block w-full p-2 mt-1 border border-gray-300 rounded">
                                                         <option>{{ __('Select a gender') }}</option>
 
@@ -301,7 +301,7 @@
                                         d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z">
                                     </path>
                                 </svg>
-                                <span>{{ __('Supprimer') }}</span>
+                                <span class="text-lg font-bold">{{ __('Supprimer') }}</span>
                             </button>
                         </td>
                     </tr>
