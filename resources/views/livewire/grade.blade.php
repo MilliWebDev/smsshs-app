@@ -56,4 +56,4 @@
 
         </div>
     @endif
-    <Livewire:@livewire('grades-results') </div>
+</div>
