@@ -1,7 +1,7 @@
-<div>
+<div class="p-6 mt-10 bg-white rounded shadow">
     <div class="mb-4">
-        <label for="semester">Choisir une session:</label>
-        <select wire:model="selectedSemesterId" id="semester" class="p-2 border rounded">
+        <label class="block mb-2 text-lg font-bold text-gray-600">{{ __('Semestre choisis') }}</label>
+        <select wire:model="selectedSemesterId" id="semester" class="w-full p-2 border border-gray-300 rounded">
             @foreach ($semesters as $semester)
                 <option value="{{ $semester->id }}">
                     {{ $semester->name }} ({{ $semester->start_date }} - {{ $semester->end_date }})
