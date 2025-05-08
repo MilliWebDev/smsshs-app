@@ -17,13 +17,23 @@ class GradesResults extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        $teacherId = auth()->user()->teacher->id;
+        $teacherId = auth()->user()->teacher->id ?? null;
+
+        if (auth()->user()->role == 'admin') {
+            $teacherId = null;
+        }
+
+        $query = \App\Models\Grade::with(['student', 'subject', 'teacher'])
+        ->where('semester_id', $this->selectedSemesterId);
+
+        if ($teacherId) {
+         $query->where('teacher_id', $teacherId);
+        }
+
 
         return view('livewire.grades-results', [
             'semesters' => \App\Models\Semester::orderBy('start_date')->get(),
-            'grades' => \App\Models\Grade::with(['student', 'subject', 'teacher'])
-                ->where('semester_id', $this->selectedSemesterId)
-                ->paginate(20),
+            'grades' => $query->paginate(20),
         ]);
     }
 }
