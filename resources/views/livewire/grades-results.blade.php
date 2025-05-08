@@ -1,7 +1,7 @@
 <div class="p-6 mt-10 bg-white rounded shadow">
     <div class="mb-4">
         <label class="block mb-2 text-lg font-bold text-gray-600">{{ __('Semestre choisis') }}</label>
-        <select wire:model="selectedSemesterId" id="semester" class="w-full p-2 border border-gray-300 rounded">
+        <select wire:model="selectedSemesterId" id="semester" class="w-1/4 p-2 border border-gray-300 rounded">
             @foreach ($semesters as $semester)
                 <option value="{{ $semester->id }}">
                     {{ $semester->name }} ({{ $semester->start_date }} - {{ $semester->end_date }})
@@ -12,40 +12,52 @@
 
     <!-- Display Grades -->
 
-
-    {{ $grades->links() }}
-
     <div class="overflow-x-auto border border-gray-300 rounded-lg">
-        <table class="w-full border border-collapse table-auto">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="px-4 py-2 border">Étudiant</th>
-                    <th class="px-4 py-2 border">Matière</th>
-                    <th class="px-4 py-2 border">Note</th>
-                    <th class="px-4 py-2 border">Commentaire</th>
-                    <th class="px-4 py-2 border">Enseignant</th>
+        @foreach ($grades->groupBy('subject_id') as $subjectId => $subjectGrades)
+        <h2 class="text-lg font-bold mt-6">
+            Matière : {{ $subjectGrades->first()->subject->name }}
+        </h2>
+
+        @foreach ($subjectGrades->groupBy(fn($grade) => $grade->student->classroom->id ?? 'inconnu') as $classId => $classGrades)
+            <h3 class="text-md font-semibold text-blue-600 mt-2">
+                Classe : {{ $classGrades->first()->student->classroom->name ?? 'Inconnue' }}
+            </h3>
+
+             @php
+                $assignments = $classGrades->pluck('assignment')->unique('id')->sortBy('title');
+                $students = $classGrades->groupBy('student_id');
+            @endphp
+
+        <table class="table-auto w-full border-collapse border mb-6">
+            <thead class="text-lg font-extrabold bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-2">{{__('Étudiant')}}</th>
+                    @foreach ($assignments as $assignment)
+                        <th class="border px-4 py-2">{{ $assignment->title }}</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($grades->groupBy('student_id') as $studentGrades)
-                    <tr class="font-bold bg-blue-100">
-                        <td class="px-4 py-2 border" colspan="5">
-                            {{ $studentGrades->first()->student->name }}
-                        </td>
+                @foreach ($students as $studentId => $studentGrades)
+                    <tr>
+                        <td class="border px-4 py-2"><span class='text-lg font-bold'>{{ $studentGrades->first()->student->first_name }}</span></td>
+                            @foreach ($assignments as $assignment)
+                            @php
+                                $grade = $studentGrades->firstWhere('assignment_id', $assignment->id);
+                            @endphp
+                            <td class="border px-4 py-2">
+                                <span class='text-lg font-bold'>{{ $grade ? $grade->score : '-' }}</span>
+                            </td>
+                        @endforeach
                     </tr>
-                    @foreach ($studentGrades as $grade)
-                        <tr>
-                            <td class="px-4 py-2 border"></td> {{-- Empty for spacing --}}
-                            <td class="px-4 py-2 border">{{ $grade->subject->name }}</td>
-                            <td class="px-4 py-2 border">{{ $grade->score }} / 20</td>
-                            <td class="px-4 py-2 border">{{ $grade->comment }}</td>
-                            <td class="px-4 py-2 border">{{ $grade->teacher->name }}</td>
-                        </tr>
-                    @endforeach
                 @endforeach
             </tbody>
         </table>
+    @endforeach
+@endforeach
 
+    <div class="mt-4">
+        {{ $grades->links() }}
 
     </div>
 </div>
