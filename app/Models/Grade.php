@@ -35,6 +35,7 @@ class Grade extends Model
         'is_late',
         'submitted_at',
         'comment',
+        'semester_id',
     ];
 
     public function assignment(): BelongsTo
@@ -49,7 +50,7 @@ class Grade extends Model
 
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teachers::class);
     }
 
     public function subject(): BelongsTo
