@@ -20,6 +20,7 @@ Route::middleware([
 
     Route::get('/students', StudentsView::class);
     Route::get('/grades', \App\Livewire\Grade::class)->name('grades');
+    Route::get('/grades-results', \App\Livewire\GradesResults::class)->name('grades-results');
 });
 
 Route::middleware([
