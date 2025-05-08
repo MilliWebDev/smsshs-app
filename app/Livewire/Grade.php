@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Models\Semester;
+use Carbon\Carbon;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -33,6 +35,19 @@ class Grade extends Component
         $teacherId = auth()->user()->teacher->id;
         $subjectId = \App\Models\ClassSubjectTeacher::find($this->selectedClassSubjectTeacher)->subject_id;
 
+        $currentDate = Carbon::today(); // or now() if you want time too
+
+        $currentSemester = Semester::where('start_date', '<=', $currentDate)
+            ->where('end_date', '>=', $currentDate)
+            ->first();
+
+        if (! $currentSemester) {
+            throw new \Exception('Aucune session active trouvée pour la date actuelle.');
+        }
+
+        $semesterId = $currentSemester->id;
+        // dd($semesterId);
+
         // Validate score
         if (! is_numeric($grade) || $grade < 0 || $grade > 20) {
             $this->dispatch('notify');
@@ -60,11 +75,12 @@ class Grade extends Component
                 'assignment_id' => $assignmentId,
                 'teacher_id' => $teacherId,
                 'subject_id' => $subjectId,
-                'comment' => $description,
+                'semester_id' => $semesterId,
 
             ],
             [
                 'score' => $grade,
+                'comment' => $description,
             ]
         );
 
