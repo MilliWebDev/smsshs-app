@@ -11,44 +11,41 @@
     </div>
 
     <!-- Display Grades -->
-    <table class="w-full table-auto">
-        <thead>
-            <tr>
-                <th>Élève</th>
-                <th>Matière</th>
-                <th>Professeur</th>
-                <th>Note</th>
-                <th>Commentaire</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($grades as $grade)
-                <tr>
-                    <td>{{ $grade->student->name }}</td>
-                    <td>{{ $grade->subject->name }}</td>
-                    <td>{{ $grade->teacher->name }}</td>
-                    <td>{{ $grade->score }}</td>
-                    <td>{{ $grade->comment }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" class="text-center">Aucun résultat pour cette session.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+
 
     {{ $grades->links() }}
 
     <div class="overflow-x-auto border border-gray-300 rounded-lg">
-        <table class="w-full mt-6 border table-auto">
-            <thead class="text-lg font-extrabold bg-gray-100">
-
+        <table class="w-full border border-collapse table-auto">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2 border">Étudiant</th>
+                    <th class="px-4 py-2 border">Matière</th>
+                    <th class="px-4 py-2 border">Note</th>
+                    <th class="px-4 py-2 border">Commentaire</th>
+                    <th class="px-4 py-2 border">Enseignant</th>
+                </tr>
             </thead>
             <tbody>
-
+                @foreach ($grades->groupBy('student_id') as $studentGrades)
+                    <tr class="font-bold bg-blue-100">
+                        <td class="px-4 py-2 border" colspan="5">
+                            {{ $studentGrades->first()->student->name }}
+                        </td>
+                    </tr>
+                    @foreach ($studentGrades as $grade)
+                        <tr>
+                            <td class="px-4 py-2 border"></td> {{-- Empty for spacing --}}
+                            <td class="px-4 py-2 border">{{ $grade->subject->name }}</td>
+                            <td class="px-4 py-2 border">{{ $grade->score }} / 20</td>
+                            <td class="px-4 py-2 border">{{ $grade->comment }}</td>
+                            <td class="px-4 py-2 border">{{ $grade->teacher->name }}</td>
+                        </tr>
+                    @endforeach
+                @endforeach
             </tbody>
         </table>
+
 
     </div>
 </div>

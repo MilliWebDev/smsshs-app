@@ -23,11 +23,6 @@ class GradesResults extends Component
             'semesters' => \App\Models\Semester::orderBy('start_date')->get(),
             'grades' => \App\Models\Grade::with(['student', 'subject', 'teacher'])
                 ->where('semester_id', $this->selectedSemesterId)
-                ->where('teacher_id', $teacherId)
-                ->whereHas('student', function ($query) {
-                    $query->where('classroom_id', auth()->user()->teacher->classroom_id);
-                })
-                ->orderBy('student_id')
                 ->paginate(20),
         ]);
     }
