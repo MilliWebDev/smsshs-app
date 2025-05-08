@@ -2,12 +2,12 @@
 
     <div class="my-4">
         <label
-            class="block mb-2 font-bold text-lg text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
+            class="block mb-2 text-lg font-bold text-gray-600">{{ __('Sélectionner une classe et une matière') }}</label>
         <select wire:model.live="selectedClassSubjectTeacher" class="w-full p-2 border border-gray-300 rounded">
             <option value="">{{ __('Sélectionner une classe et une matière') }}</option>
             @foreach ($classSubjectTeachers as $cst)
                 <option value="{{ $cst->id }}">
-                    <span class='font-bold text-lg'> {{ $cst->class->name }} - {{ $cst->subject->name }} </span>
+                    <span class='text-lg font-bold'> {{ $cst->class->name }} - {{ $cst->subject->name }} </span>
                 </option>
             @endforeach
         </select>
@@ -16,7 +16,7 @@
     @if ($students && $assignments)
         <div class="overflow-x-auto">
             <table class="w-full mt-6 border table-auto">
-                <thead class="bg-gray-100 text-lg font-extrabold">
+                <thead class="text-lg font-extrabold bg-gray-100">
                     <tr>
                         <th class="p-2 text-left">Student</th>
                         @foreach ($assignments as $assignment)
@@ -28,7 +28,7 @@
                     @if ($students && $students->count() > 0)
                         @foreach ($students as $student)
                             <tr class="border-t">
-                                <td class="p-2 "><span class='font-bold text-lg'>{{ $student->first_name }}
+                                <td class="p-2 "><span class='text-lg font-bold'>{{ $student->first_name }}
                                         {{ $student->last_name }}</span></td>
                                 @foreach ($assignments as $assignment)
                                     <td class="p-2">
@@ -43,7 +43,7 @@
                     @else
                         <tr>
                             <td colspan="{{ $assignments ? $assignments->count() + 1 : 2 }}"
-                                class="p-2 text-center font-bold text-lg">
+                                class="p-2 text-lg font-bold text-center">
                                 {{ __('Aucun apprenant ou matière trouvé') }}.
                             </td>
                         </tr>
@@ -56,4 +56,4 @@
 
         </div>
     @endif
-</div>
+    <Livewire:@livewire('grades-results') </div>
