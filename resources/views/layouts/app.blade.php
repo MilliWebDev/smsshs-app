@@ -328,14 +328,14 @@
                                 <a href="{{ route('grades') }}"
                                     class="{{ request()->routeIs('grades') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                    <span class="ml-3">{{ __('Donner une note') }}</span>
+                                    <span class="ml-3">{{ __('Donner notes') }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('grades') }}"
-                                    class="{{ request()->routeIs('grades') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <a href="{{ route('grades-results') }}"
+                                    class="{{ request()->routeIs('grades-results') ? 'border border-blue-800' : '' }} flex items-center p-2  tracking-wide font-bold text-lg text-cyan-700 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-                                    <span class="ml-3">{{ __('Afficher une note') }}</span>
+                                    <span class="ml-3">{{ __('Afficher notes') }}</span>
                                 </a>
                             </li>
                         </ul>
