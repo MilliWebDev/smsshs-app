@@ -1,5 +1,5 @@
 <div class="p-6 mt-10 bg-white rounded shadow">
-    <div class="mb-4">
+    <div class="mb-4 rounded-lg bg-sky-100 p-4 z-10">
         <label class="block mb-2 text-lg font-bold text-gray-600">{{ __('Semestre choisis') }}</label>
         <select wire:model="selectedSemesterId" id="semester" class="w-1/4 p-2 border border-gray-300 rounded">
             @foreach ($semesters as $semester)
@@ -25,7 +25,7 @@
                     </h3>
         
                     @php
-                        $assignments = $classGrades->pluck('assignment')->unique('id')->sortBy('title');
+                        $assignments = $classGrades->pluck('assignment')->unique('id');
                         $students = $classGrades->groupBy('student_id');
                     @endphp
         
@@ -45,15 +45,23 @@
                             @foreach ($students as $studentId => $studentGrades)
                                 <tr>
                                     <td class="border px-4 py-2">
-                                        <span class="text-lg font-bold">{{ $studentGrades->first()->student->first_name }}</span>
+                                        @if(auth()->user()->role == 'admin')
+                                        <input
+                                                type="checkbox"
+                                                wire:model="selectedStudents"
+                                                value="{{ $studentId }}"
+                                                class="mr-2"
+                                            >
+                                            @endif
+                                        <span class="text-lg font-bold">{{ $studentGrades->first()->student->first_name }}--{{$studentGrades->first()->student->last_name}}</span>
                                     </td>
         
                                     @foreach ($assignments as $assignment)
                                         @php
                                             $grade = $studentGrades->firstWhere('assignment_id', $assignment->id);
                                         @endphp
-                                        <td class="border px-4 py-2">
-                                            <span class="text-lg font-bold">
+                                        <td class="border px-4 py-2 text-center">
+                                            <span class="text-lg font-bold ">
                                                 {{ $grade ? $grade->score : '-' }}
                                             </span>
                                         </td>
@@ -62,8 +70,7 @@
                                     @if(auth()->user()->role == 'admin')
                                         <td class="border px-4 py-2">
                                             @php $grade = $studentGrades->first(); @endphp
-                                            <button wire:click="editGrade('{{ $grade->id }}')" class="text-blue-600 hover:underline mr-2">Modifier</button>
-                                            <button wire:click="deleteGrade('{{ $grade->id }}')" class="text-red-600 hover:underline">Supprimer</button>
+                                            <button wire:click="savepdf('{{ $grade->id }}')" class="text-blue-600 hover:underline mr-2">enregistrer</button>
                                         </td>
                                     @endif
                                 </tr>
