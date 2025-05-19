@@ -19,6 +19,8 @@ class AssignSubject extends Component
 
     public $subject_name;
 
+    public $subject_coefficient;
+
     public $subject_description;
 
     public $teacher_id = [];
@@ -33,6 +35,7 @@ class AssignSubject extends Component
             'subject_description' => 'required|string|max:255',
             'class_id.*' => 'string|exists:classes,id',
             'teacher_id.*' => 'string|exists:teachers,id',
+            'coefficient' => 'required|integer|min:1|max:10',
         ]);
         try {
             DB::transaction(function () {
@@ -50,6 +53,7 @@ class AssignSubject extends Component
                 $subject = Subject::create([
                     'name' => $this->subject_name,
                     'description' => $this->subject_description,
+                    'coefficient' => $this->coefficient,
                 ]);
 
                 foreach ($this->class_id as $class) {
@@ -80,6 +84,7 @@ class AssignSubject extends Component
         $subject = Subject::with(['classSubjectTeachers.class', 'classSubjectTeachers.teacher'])->where('id', $cleanId)->first();
         $this->subject_name = $subject->name;
         $this->subject_description = $subject->description;
+        $this->subject_coefficient = $subject->coefficient;
         $this->class_id = $subject->classSubjectTeachers->pluck('classroom_id')->toArray();
         $this->teacher_id = $subject->classSubjectTeachers->pluck('teacher_id')->toArray();
 
@@ -93,6 +98,7 @@ class AssignSubject extends Component
             'subject_description' => 'required|string|max:255',
             'class_id' => 'required|array',
             'teacher_id' => 'required|array',
+            'subject_coefficient' => 'required|integer|min:1|max:10',
         ]);
 
         // Find the subject record to update
@@ -104,6 +110,7 @@ class AssignSubject extends Component
                 $subject->update([
                     'name' => $this->subject_name,
                     'description' => $this->subject_description,
+                    'coefficient' => $this->subject_coefficient,
                 ]);
 
                 // dd(ClassSubjectTeacher::where('subject_id', $subject->id)->delete());
