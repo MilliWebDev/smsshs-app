@@ -70,7 +70,7 @@
                                     @if(auth()->user()->role == 'admin')
                                         <td class="border px-4 py-2">
                                             @php $grade = $studentGrades->first(); @endphp
-                                            <button wire:click="savepdf('{{ $grade->id }}')" class="text-blue-600 hover:underline mr-2">enregistrer</button>
+                                            <button wire:click="savePDF('{{ $studentId }}')" class="text-blue-600 hover:underline mr-2">enregistrer</button>
                                         </td>
                                     @endif
                                 </tr>
