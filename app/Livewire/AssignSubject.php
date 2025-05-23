@@ -35,7 +35,7 @@ class AssignSubject extends Component
             'subject_description' => 'required|string|max:255',
             'class_id.*' => 'string|exists:classes,id',
             'teacher_id.*' => 'string|exists:teachers,id',
-            'coefficient' => 'required|integer|min:1|max:10',
+            'subject_coefficient' => 'required|integer|min:1|max:10',
         ]);
         try {
             DB::transaction(function () {
@@ -53,7 +53,7 @@ class AssignSubject extends Component
                 $subject = Subject::create([
                     'name' => $this->subject_name,
                     'description' => $this->subject_description,
-                    'coefficient' => $this->coefficient,
+                    'coefficient' => $this->subject_coefficient,
                 ]);
 
                 foreach ($this->class_id as $class) {
