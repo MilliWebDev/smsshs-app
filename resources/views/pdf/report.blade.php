@@ -72,10 +72,11 @@
                     <thead >
                         <tr >
                             <th scope="col" >Matières</th>
-                            <th scope="col" >Note</th>
+                            @foreach($assignments as $assignment)
+                                <th scope="col" >{{$assignment->title}}</th>
+                            @endforeach
                             <th scope="col" >Moyenne</th>
                             <th scope="col" >Appréciation</th>
-                            <th scope="col" >Remarques</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,13 +93,10 @@
                             </td>
                             @endforeach
                             <td >
-                                <p>{{$subjectGrades->avg('value')}}</p>
+                                <p>{{$subjectGrades->avg('score')}}</p>
                             </td>
                             <td >
-                                <p>{{$subjectGrades->first()->appreciation}}</p>
-                            </td>
-                            <td >
-                                <p>{{$subjectGrades->first()->remark}}</p>
+                                <p>{{$subjectGrades->first()->comment}}</p>
                             </td>
 
                         </tr>

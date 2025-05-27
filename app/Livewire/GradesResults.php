@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use PDF;
 
 class GradesResults extends Component
@@ -16,7 +17,19 @@ class GradesResults extends Component
         $grades = \App\Models\Grade::where('student_id', $cleanId)->with(['student', 'subject', 'teacher'])->get() ->groupBy(fn($grade) => $grade->subject->name);
         //dd($grades);
          // Load the view into a PDF
-        $pdf = PDF::loadView('pdf.report', ['data' => $grades,'semester' => \App\Models\Semester::find($this->selectedSemesterId)]);
+        $pdf = PDF::loadView('pdf.report', ['data' => $grades,'semester' => \App\Models\Semester::find($this->selectedSemesterId),'assignments' => \App\Models\Assignment::all()]);
+        
+
+       $student = optional($grades->first()?->first()?->student);
+
+       $studentName = ($student->first_name ?? '') . ' ' . ($student->last_name ?? '');
+
+       $studentName = trim($studentName) !== '' ? $studentName : 'student';
+
+
+        //filename
+        $filename = 'report_' . Str::slug($studentName) . '_semester_' . $this->selectedSemesterId . now()->format('Y_m_d') .'.pdf';
+
         // Stream the PDF in the browser
         return response()->stream(
             function () use ($pdf) {
@@ -25,7 +38,7 @@ class GradesResults extends Component
             200,
             [
                 'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="produits.pdf"',
+                'Content-Disposition' => "inline; filename=\"$filename\"",
             ]
         );
 
